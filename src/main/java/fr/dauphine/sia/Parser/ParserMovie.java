@@ -8,13 +8,20 @@ import java.util.Date;
 import java.util.List;
 
 import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Base64;
+
 public class ParserMovie {
 
-	public static List<Movie> readMoviefromXML(String nameFileGraph) throws FileNotFoundException, XMLStreamException {
+	public static List<Movie> readMoviefrom(String artistName){
 		List<Movie> listMovie = new ArrayList<Movie>();
 		int eventType;
 		String title;
@@ -36,7 +43,40 @@ public class ParserMovie {
 		double imbdVotes;
 		String imdbID;
 		String type;
-		XMLInputFactory xmlif = XMLInputFactory.newInstance();
+		
+		
+		
+		
+		
+		HttpURLConnection conn;
+		try {
+			conn = (HttpURLConnection) new URL(
+			        "https://api.deezer.com/search?q=artist:\""+artistName+"\"").openConnection();
+			conn.connect();
+			BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+			byte[] bytes = new byte[1024];
+			int tmp ;
+			 while( (tmp = bis.read(bytes) ) != -1 ) {
+		            String chaine = new String(bytes,0,tmp);
+		            System.out.print(chaine);
+		        }
+			 
+			 
+			 
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        
+        
+        
+        
+		
+		/*
 		XMLStreamReader xmlsr = xmlif.createXMLStreamReader(new FileReader(nameFileGraph));
 		while (xmlsr.hasNext()) {
 			eventType = xmlsr.next();
@@ -131,7 +171,9 @@ public class ParserMovie {
 				break;
 			}
 		}
-		return listMovie;
+		return listMovie;*/
+		
+		return null;
 	}
 
 }
