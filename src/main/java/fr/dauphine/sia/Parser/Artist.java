@@ -1,5 +1,11 @@
 package fr.dauphine.sia.Parser;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class Artist {
 
 	int id;
@@ -12,7 +18,11 @@ public class Artist {
     String picture_xl;
     String tracklist;
     String type;
-    
+    static String API_URL="https://api.deezer.com/search?q=";
+    static String ARTIST_TAG = "artist:\"";
+    static String ALBUM_TAG = "album:\"";
+    static String TRACK_TAG = "track:\"";
+    static String LABEL_TAG = "label:\"";
     
 
 	public Artist(int id, String name, String link, String picture, String picture_small,
@@ -50,7 +60,7 @@ public class Artist {
 
 
 
-	public void setName(String name) {
+	public void setName(String name) {HttpURLConnection conn;
 		this.name = name;
 	}
 
@@ -131,8 +141,7 @@ public class Artist {
 	public String getTracklist() {
 		return tracklist;
 	}
-
-
+	
 
 	public void setTracklist(String tracklist) {
 		this.tracklist = tracklist;
@@ -158,6 +167,41 @@ public class Artist {
 		System.out.println("picture_medium "+picture_medium+"  picture_big "+picture_big+"  picture_xl "+picture_xl);
 		System.out.println("tracklist "+tracklist+" type "+type);
 		System.out.println("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");
+	}
+	
+	private static String search(String name, String TAG) {
+		HttpURLConnection conn;
+		name = name.replaceAll(" ", "+");
+		try {
+			conn = (HttpURLConnection) new URL(API_URL+TAG+name+"\"").openConnection();
+			conn.connect();
+			BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+			return new String(bis.readAllBytes());
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		return null;	
+	}
+	
+	public static String searchByArtistName(String name) {
+		return search(name, ARTIST_TAG);
+	}
+	
+	public static String searchByAlbumName(String name) {
+		return search(name, ALBUM_TAG);
+	}
+	
+	public static String searchByTrackName(String name) {
+		return search(name, TRACK_TAG);
+	}
+	
+	public static String searchByLabelName(String name) {
+		return search(name, LABEL_TAG);
 	}
 	
 }
