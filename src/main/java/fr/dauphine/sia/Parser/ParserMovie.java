@@ -100,17 +100,17 @@ public class ParserMovie {
 		return list;
 	}
 	
-	public static Film parserFileJSON(String titre) {
+	public static Film parserFileJSON(String str) {
 		
-		String address="http://www.omdbapi.com/?t="+titre+"&apikey=aac9f937";
+//		String address="http://www.omdbapi.com/?t="+titre+"&apikey=aac9f937";
 		Film film = null;
-		HttpURLConnection conn;
+//		HttpURLConnection conn;
 		try {
-			conn = (HttpURLConnection) new URL(address).openConnection();
-			conn.connect();
-			BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
-			
-			String str=new String(bis.readAllBytes());
+//			conn = (HttpURLConnection) new URL(address).openConnection();
+//			conn.connect();
+//			BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+//			
+//			String str=new String(bis.readAllBytes());
 			
 			JSONObject jo =new JSONObject(str);
 			String response=jo.getString("Response");
@@ -157,13 +157,7 @@ public class ParserMovie {
 				System.out.println("Erreur de titre");
 			}
 			
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
+		}  catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
