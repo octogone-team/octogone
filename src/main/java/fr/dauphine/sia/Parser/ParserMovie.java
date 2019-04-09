@@ -24,27 +24,15 @@ import java.net.URL;
 public class ParserMovie {
 
 	
-	
-	
-	public static List<ArtistModel> parserArtistModel(String artistName){
+	public static List<ArtistModel> parserArtistModel(String jsonChaine){
 		
 		List<ArtistModel> list=new ArrayList<ArtistModel>();
 		
 		
-		
-		HttpURLConnection conn;
 		try {
-			String address="https://api.deezer.com/search?q=artist:\""+artistName+"\"";
 			
-			conn = (HttpURLConnection) new URL(address).openConnection();
 			
-			conn.connect();
-			
-			BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
-			
-			String str=new String(bis.readAllBytes());
-			
-			JSONObject jo =new JSONObject(str);
+			JSONObject jo =new JSONObject(jsonChaine);
 			
 			JSONArray array= jo.getJSONArray("data");
 			
@@ -104,12 +92,6 @@ public class ParserMovie {
 			} 
 			 
 			 
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -120,7 +102,6 @@ public class ParserMovie {
 	
 	public static Film parserFileJSON(String titre) {
 		
-		List<Film> list=new ArrayList<Film>();
 		String address="http://www.omdbapi.com/?t="+titre+"&apikey=aac9f937";
 		Film film = null;
 		HttpURLConnection conn;
@@ -190,11 +171,12 @@ public class ParserMovie {
 		return film;
 		
 	}
+	
 	public static void main(String[] argv) {
-	    //ParserMovie.parserArtistModel("akon");
-		Film film=ParserMovie.parserFileJSON("indian2332332a");
+	    ParserMovie.parserArtistModel(Artist.searchByTrackName("abc"));
+		//Film film=ParserMovie.parserFileJSON("indian2332332a");
 		
-		System.out.println(" voici le film: "+film);
+		//System.out.println(" voici le film: "+film);
 	}
 
 }
