@@ -60,7 +60,7 @@ public class Artist {
 
 
 
-	public void setName(String name) {HttpURLConnection conn;
+	public void setName(String name) {
 		this.name = name;
 	}
 
