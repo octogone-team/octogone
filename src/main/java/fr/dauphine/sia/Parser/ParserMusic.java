@@ -1,11 +1,12 @@
 package fr.dauphine.sia.Parser;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import fr.dauphine.sia.SeachMusics;
 
 public class ParserMusic {
 	
@@ -78,6 +79,6 @@ public class ParserMusic {
 	}
 	
 	public static void main(String[] argv) {
-	    ParserMusic.parserArtistModel(Artist.searchByTrackName("abc"));
+	    ParserMusic.parserArtistModel(SeachMusics.searchByTrackName("abc"));
 	}
 }
