@@ -3,18 +3,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import fr.dauphine.sia.SearchMovies;
+
 public class ParserMovie {
 
-	public static MovieModel parserFileJSON(String str) {
+	public static MovieModel parserFileJSON(String jsonStr) {
 		MovieModel movie = null;
 		try {
 			
-			JSONObject jo =new JSONObject(str);
+			JSONObject jo =new JSONObject(jsonStr);
 			String response=jo.getString("Response");
 			
 			if(Boolean.parseBoolean(response)==true) {
 				String title=jo.getString("Title");
-			    String year=jo.getString("Year");
+				String year=jo.getString("Year");
 			    String rated=jo.getString("Rated");
 			    String released=jo.getString("Released");
 			    String runtime=jo.getString("Runtime");
@@ -37,20 +39,19 @@ public class ParserMovie {
 			    String production=jo.getString("Production");
 			    String website=jo.getString("Website");
 			    
-				movie= new MovieModel(title,year,rated,released,runtime,genre,director,
-				writer,actors,plot,language,country,awards,poster,metascore, imdbRating,imdbVotes,imdbID,type, 
-				dVD,boxOffice, production,website,response);
+			    movie= new MovieModel(title,year,rated,released,runtime,genre,director,
+						writer,actors,plot,language,country,awards,poster,metascore, imdbRating,imdbVotes,imdbID,type, 
+						dVD,boxOffice, production,website,response);
+			    
+			    JSONArray array= jo.getJSONArray("Ratings");
 				
-				JSONArray array= jo.getJSONArray("Ratings");
-				
-				for(int i=0; i<array.length();i++) {
-					String source=array.getJSONObject(i).getString("Source");
-					String value=array.getJSONObject(i).getString("Value");
+				for(int j=0; j<array.length();j++) {
+					String source=array.getJSONObject(j).getString("Source");
+					String value=array.getJSONObject(j).getString("Value");
 					Rating rating=new Rating(source, value);
 					movie.addRate(rating);
 				}
-			}
-			else {
+			} else {
 				System.out.println("Erreur de titre");
 			}
 			
@@ -61,7 +62,7 @@ public class ParserMovie {
 	}
 	
 	public static void main(String[] argv) {
-		MovieModel film=ParserMovie.parserFileJSON("indian2332332a");
+		MovieModel film=ParserMovie.parserFileJSON(SearchMovies.getSpecificMoviesByTitle("X-men"));
 		System.out.println(" voici le film: "+film);
 	}
 

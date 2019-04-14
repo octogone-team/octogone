@@ -1,14 +1,11 @@
 package fr.dauphine.sia;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 public class SearchMovies {
 	
@@ -16,7 +13,7 @@ public class SearchMovies {
 	private static String url = "http://www.omdbapi.com/";
 	private static String charset = "UTF-8";
 	
-	public static JSONObject getMoviesByTitle(String title) {
+	public static String getMoviesByTitle(String title) {
 		String query = null;
 		try {
 			query = String.format("apikey=%s&s=%s", 
@@ -28,7 +25,19 @@ public class SearchMovies {
 		return getFilm(query);
 	}
 	
-	public static JSONObject getMoviesByYear(String title, int year) {
+	public static String getSpecificMoviesByTitle(String title) {
+		String query = null;
+		try {
+			query = String.format("apikey=%s&t=%s", 
+						URLEncoder.encode(key, charset),
+						URLEncoder.encode(title, charset));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return getFilm(query);
+	}
+	
+	public static String getMoviesByYear(String title, int year) {
 		String query = null;
 		try {
 			query = String.format("apikey=%s&s=%s&y=%s", 
@@ -41,7 +50,7 @@ public class SearchMovies {
 		return getFilm(query);
 	}
 	
-	public static JSONObject getSeriesByTitle(String title) {
+	public static String getSeriesByTitle(String title) {
 		String query = null;
 		try {
 			query = String.format("apikey=%s&t=%s", 
@@ -53,7 +62,7 @@ public class SearchMovies {
 		return getFilm(query);
 	}
 	
-	public static JSONObject getSeriesBySeason(String title, int season) {
+	public static String getSeriesBySeason(String title, int season) {
 		String query = null;
 		try {
 			query = String.format("apikey=%s&t=%s&season=%s", 
@@ -66,7 +75,7 @@ public class SearchMovies {
 		return getFilm(query);
 	}
 	
-	public static JSONObject getSeriesByEpisode(String title, int season, int episode) {
+	public static String getSeriesByEpisode(String title, int season, int episode) {
 		String query = null;
 		try {
 			query = String.format("apikey=%s&t=%s&season=%s&episode=%s", 
@@ -80,20 +89,32 @@ public class SearchMovies {
 		return getFilm(query);
 	}
 
-	private static JSONObject getFilm (String query) {
-		JSONObject jsonObject = null;
+	private static String getFilm (String query) {
         try {
         	if(query!=null) {
 	            URLConnection connection = new URL(url + "?" + query).openConnection();
 	            connection.setRequestProperty("Accept-Charset", charset);
 				InputStream response = connection.getInputStream();
-				jsonObject = (JSONObject) new JSONParser().parse(new InputStreamReader(response, charset));
+				return (convertInputStreamToString(response));
         	}
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (ParseException e) {
+		}
+        return null;
+	}
+	
+	private static String convertInputStreamToString(InputStream inputStream){
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int length;
+        try {
+			while ((length = inputStream.read(buffer)) != -1) {
+			    result.write(buffer, 0, length);
+			}
+			return result.toString(charset);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        return jsonObject;
+        return null;
 	}
 }
