@@ -1,14 +1,10 @@
 package fr.dauphine.sia;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 public class SeachMusics {
 
@@ -19,40 +15,50 @@ public class SeachMusics {
     private static String LABEL_TAG = "label:\"";
     private static String charset = "UTF-8";
     
-	private static JSONObject search(String name, String TAG) {
+	private static String search(String name, String TAG) {
 		HttpURLConnection conn;
 		name = name.replaceAll(" ", "+");
 		try {
 			conn = (HttpURLConnection) new URL(API_URL+TAG+name+"\"").openConnection();
 			conn.connect();
 			InputStream response = conn.getInputStream();
-			JSONObject jsonObject = (JSONObject) new JSONParser().parse(new InputStreamReader(response, charset));
-			return jsonObject;
-			
+			return (convertInputStreamToString(response));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
 		}
-	
 		return null;	
 	}
 	
-	public static JSONObject searchByArtistName(String name) {
+	public static String searchByArtistName(String name) {
 		return search(name, ARTIST_TAG);
 	}
 	
-	public static JSONObject searchByAlbumName(String name) {
+	public static String searchByAlbumName(String name) {
 		return search(name, ALBUM_TAG);
 	}
 	
-	public static JSONObject searchByTrackName(String name) {
+	public static String searchByTrackName(String name) {
 		return search(name, TRACK_TAG);
 	}
 	
-	public static JSONObject searchByLabelName(String name) {
+	public static String searchByLabelName(String name) {
 		return search(name, LABEL_TAG);
+	}
+	
+	private static String convertInputStreamToString(InputStream inputStream){
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int length;
+        try {
+			while ((length = inputStream.read(buffer)) != -1) {
+			    result.write(buffer, 0, length);
+			}
+			return result.toString(charset);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        return null;
 	}
 }
