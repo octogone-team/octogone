@@ -1,8 +1,16 @@
 package fr.dauphine.sia.display;
 
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class WelcomePage extends JFrame {
 
@@ -22,10 +30,20 @@ public class WelcomePage extends JFrame {
         JButton movieSearchButton =new JButton("Movie research");//creating instance of JButton
         JButton musicSearchButton =new JButton("Music research");//creating instance of JButton
         movieSearchButton.setBounds((screenWidth/2),400,200, 40);//x axis, y axis, width, height
+
         musicSearchButton.setBounds((screenWidth/2)-300,400,200, 40);//x axis, y axis, width, height
 
         panel.add(movieSearchButton);
         panel.add(musicSearchButton);
+
+        movieSearchButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SearchMoviePage.main(null);
+
+            }
+        });
 
 
         JFrame frame = new JFrame("octogone Server");
