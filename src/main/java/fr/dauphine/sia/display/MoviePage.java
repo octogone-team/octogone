@@ -11,7 +11,7 @@ public class MoviePage extends JFrame {
 	private JPanel container = new JPanel();
 	private JButton boutonSeries = new JButton("Series");
 	private JButton boutonMovies = new JButton("Movies");
-	
+
 	public void fenetre() {
 		this.setTitle("Search Films");
 		this.setSize(500, 500);

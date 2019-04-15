@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 public class WelcomePage extends JFrame {
 
@@ -25,6 +26,8 @@ public class WelcomePage extends JFrame {
 
         JLabel userLabel = new JLabel("Welcome To Octogone Server");
         userLabel.setBounds(screenWidth/2-200, 100, 400, 25);
+        userLabel.setForeground(Color.RED);
+        userLabel.setBorder(new LineBorder(Color.BLACK));
         panel.add(userLabel);
 
         JButton movieSearchButton =new JButton("Movie research");//creating instance of JButton
