@@ -42,7 +42,7 @@ public class SearchMoviePage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("TEXT : title " + movieTitle.getText());
-				MovieModel film=ParserMovie.parserFileJSON(SearchMovies.getSpecificMoviesByTitle(movieTitle.getText()));
+				MovieModel film=ParserMovie.parserFileJSON(SearchMovies.getSpecificMoviesOrSeriesByTitle(movieTitle.getText()));
 				System.out.println(" voici le film: "+film);
 				
 				
