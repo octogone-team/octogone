@@ -272,12 +272,12 @@ public class MovieModel {
 		for(Rating rate:rates) {
 			str+=rate.toString();
 		}
-		return "Film [Title=" + Title + ", Year=" + Year + ", Rated=" + Rated + ",\n Released=" + Released + ", Runtime="
-				+ Runtime + ", Genre=" + Genre + ", Director=" + Director + ", Writer=" + Writer + ", Actors=" + Actors
-				+ ", Plot=" + Plot + ",\n Language=" + Language + ",\n Country=" + Country + ", Awards=" + Awards
-				+ ", Poster=" + Poster + ", rates=" + str + ", Metascore=" + Metascore + ", imdbRating=" + imdbRating
-				+ ", imdbVotes=" + imdbVotes + ", imdbID=" + imdbID + ", Type=" + Type + ", DVD=" + DVD + ", BoxOffice="
-				+ BoxOffice + ", Production=" + Production + ", Website=" + Website + ", Response=" + Response + "]";
+		return "Film [\nTitle=" + Title + ",\nYear=" + Year + ",\nRated=" + Rated + ",\nReleased=" + Released + ",\nRuntime="
+				+ Runtime + ",\nGenre=" + Genre + ",\nDirector=" + Director + ",\nWriter=" + Writer + ",\nActors=" + Actors
+				+ ",\nPlot=" + Plot + ",\nLanguage=" + Language + ",\nCountry=" + Country + ",\nAwards=" + Awards
+				+ ",\nPoster=" + Poster + ",\nrates=" + str + ",\nMetascore=" + Metascore + ",\nimdbRating=" + imdbRating
+				+ ",\nimdbVotes=" + imdbVotes + ",\nimdbID=" + imdbID + ",\nType=" + Type + ",\nDVD=" + DVD + ",\nBoxOffice="
+				+ BoxOffice + ",\nProduction=" + Production + ",\nWebsite=" + Website + ",\nResponse=" + Response + "]";
 	}
     
 }
