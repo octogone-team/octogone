@@ -27,3 +27,7 @@ hs_err_pid*
 org.*
 /target/
 /bin/
+
+# IntelliJ files
+*.idea
+*.iml
