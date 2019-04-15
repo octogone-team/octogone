@@ -1,6 +1,7 @@
 package fr.dauphine.sia.display;
 import java.awt.BorderLayout;
 import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,7 +16,7 @@ public class MoviePage extends JFrame {
 	public void fenetre() {
 		this.setTitle("Search Films");
 		this.setSize(500, 500);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		container.setBackground(Color.WHITE);
 		container.setLayout(new BorderLayout());

@@ -40,7 +40,7 @@ public class WelcomePage extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                SearchMoviePage.main(null);
+				MoviePage.main(null);
 
             }
         });
@@ -51,8 +51,7 @@ public class WelcomePage extends JFrame {
 
 
         frame.getContentPane().setBackground(Color.LIGHT_GRAY);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
         frame.setVisible(true);
 
