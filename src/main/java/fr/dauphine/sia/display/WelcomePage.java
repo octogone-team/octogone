@@ -3,6 +3,7 @@ package fr.dauphine.sia.display;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class WelcomePage extends JFrame {
 
@@ -24,8 +26,11 @@ public class WelcomePage extends JFrame {
         int screenWidth = (int)screenSize.getWidth();
 
         JLabel userLabel = new JLabel("Welcome To Octogone Server");
-        userLabel.setBounds(screenWidth/2-200, 100, 400, 25);
-        panel.add(userLabel);
+		userLabel.setBounds(screenWidth/2-200, 100, 400, 25);
+		userLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		Font font = new Font("Arial", Font.BOLD, 16);
+		userLabel.setFont(font);
+		panel.add(userLabel);
 
         JButton movieSearchButton =new JButton("Movie research");//creating instance of JButton
         JButton musicSearchButton =new JButton("Music research");//creating instance of JButton
