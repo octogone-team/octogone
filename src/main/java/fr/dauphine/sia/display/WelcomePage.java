@@ -8,22 +8,8 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class WelcomePage extends JComponent {
-
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        Image image = null;
-        try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("/home/khoudi/Documents/M1 Dauphine/SIA2/octogone/src/main/resources/movies_background.jpg");
-            assert inputStream != null;
-            image = ImageIO.read(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
-
-    }
+public class WelcomePage extends JPanel  {
+    private static Image image = Toolkit.getDefaultToolkit().getImage("/home/khoudi/Documents/M1 Dauphine/SIA2/octogone/src/main/java/fr/dauphine/sia/display/movies_music_background.jpg");
 
     WelcomePage() {
 
@@ -49,7 +35,6 @@ public class WelcomePage extends JComponent {
 
         movieSearchButton.addActionListener(e -> MoviePage.main(null));
 
-
         JFrame frame = new JFrame("octogone Server");
         frame.setSize(300, 150);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,10 +44,17 @@ public class WelcomePage extends JComponent {
 
     }
 
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+
+        g.drawImage (image, 0, 0, null);
+        repaint();
+    }
+
     public static void main(String[] args)
     {
         WelcomePage welcomePage= new WelcomePage();
-        welcomePage.repaint();
     }
 
 
