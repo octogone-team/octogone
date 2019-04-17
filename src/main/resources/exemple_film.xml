@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<root response="True">
+		<movie title="Die Hard" year="1988" rated="R" released="20 Jul 1988" runtime="132 min" genre="Action, Thriller" director="John McTiernan" writer="Roderick Thorp (novel), Jeb Stuart (screenplay), Steven E. de Souza (screenplay)" actors="Bruce Willis, Bonnie Bedelia, Reginald VelJohnson, Paul Gleason" plot="An NYPD officer tries to save his wife and several others taken hostage by German terrorists during a Christmas party at the Nakatomi Plaza in Los Angeles." language="English, German, Italian, Japanese" country="USA" awards="Nominated for 4 Oscars. Another 7 wins & 2 nominations." poster="https://m.media-amazon.com/images/M/MV5BZjRlNDUxZjAtOGQ4OC00OTNlLTgxNmQtYTBmMDgwZmNmNjkxXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg" metascore="72" imdbRating="8.2" imdbVotes="708,914" imdbID="tt0095016" type="movie"/>
+	</root>

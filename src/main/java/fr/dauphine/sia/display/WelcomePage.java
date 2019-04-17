@@ -1,36 +1,42 @@
 package fr.dauphine.sia.display;
 
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
-public class WelcomePage extends JFrame {
+public class WelcomePage extends JComponent {
+
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        Image image = null;
+        try {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("movies_background.jpg");
+            image = ImageIO.read(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
+
+    }
 
     WelcomePage() {
-        JPanel panel = new JPanel();
-        panel.setLayout(null);
-
-
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int)screenSize.getWidth();
+        int screenHeight = (int)screenSize.getHeight();
 
         JLabel userLabel = new JLabel("Welcome To Octogone Server");
 		userLabel.setBounds(screenWidth/2-200, 100, 400, 25);
 		userLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		Font font = new Font("Arial", Font.BOLD, 16);
 		userLabel.setFont(font);
-		panel.add(userLabel);
+		this.add(userLabel);
 
         JButton movieSearchButton =new JButton("Movie research");//creating instance of JButton
         JButton musicSearchButton =new JButton("Music research");//creating instance of JButton
@@ -38,33 +44,25 @@ public class WelcomePage extends JFrame {
 
         musicSearchButton.setBounds((screenWidth/2)-300,400,200, 40);//x axis, y axis, width, height
 
-        panel.add(movieSearchButton);
-        panel.add(musicSearchButton);
+        this.add(movieSearchButton);
+        this.add(musicSearchButton);
 
-        movieSearchButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-				MoviePage.main(null);
-
-            }
-        });
+        movieSearchButton.addActionListener(e -> MoviePage.main(null));
 
 
         JFrame frame = new JFrame("octogone Server");
         frame.setSize(300, 150);
-
-
-        frame.getContentPane().setBackground(Color.LIGHT_GRAY);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(this);
+        frame.pack();
         frame.setVisible(true);
 
     }
 
     public static void main(String[] args)
     {
-        new WelcomePage();
+        WelcomePage welcomePage= new WelcomePage();
+        welcomePage.repaint();
     }
 
 

@@ -1,6 +1,8 @@
 package fr.dauphine.sia.display;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,7 +13,7 @@ public class MoviePage extends JFrame {
 
 	private JPanel container = new JPanel();
 	private JButton boutonSeries = new JButton("Series");
-	private JButton boutonMovies = new JButton("Movies");
+	private JButton buttonMovies = new JButton("Movies");
 	
 	public void fenetre() {
 		this.setTitle("Search Films");
@@ -24,7 +26,8 @@ public class MoviePage extends JFrame {
 		JPanel pan = new JPanel();
 		pan.add(boutonSeries);
 		container.add(pan, BorderLayout.CENTER);
-		pan.add(boutonMovies);
+		pan.add(buttonMovies);
+		buttonMovies.addActionListener(e -> SearchMoviePage.main(null));
 		container.add(pan, BorderLayout.CENTER);
 		this.setContentPane(container);
 		this.setVisible(true);
