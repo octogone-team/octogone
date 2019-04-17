@@ -2,7 +2,6 @@ package fr.dauphine.sia.display;
 
 
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -16,7 +15,8 @@ public class WelcomePage extends JComponent {
     protected void paintComponent(Graphics g) {
         Image image = null;
         try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("movies_background.jpg");
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("/home/khoudi/Documents/M1 Dauphine/SIA2/octogone/src/main/resources/movies_background.jpg");
+            assert inputStream != null;
             image = ImageIO.read(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
