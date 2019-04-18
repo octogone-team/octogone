@@ -1,15 +1,24 @@
 package fr.dauphine.sia.display;
 
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class WelcomePage extends JPanel  {
-    private static Image image = Toolkit.getDefaultToolkit().getImage("/home/khoudi/Documents/M1 Dauphine/SIA2/octogone/src/main/java/fr/dauphine/sia/display/movies_music_background.jpg");
+	private static String image = "movies_music_background.jpg";
 
     WelcomePage() {
 
@@ -24,33 +33,44 @@ public class WelcomePage extends JPanel  {
 		userLabel.setFont(font);
 		this.add(userLabel);
 
-        JButton movieSearchButton =new JButton("Movie research");//creating instance of JButton
+		JButton movieSearchButton = new JButton("Movie research");// creating instance of JButton
         JButton musicSearchButton =new JButton("Music research");//creating instance of JButton
-        movieSearchButton.setBounds((screenWidth/2),400,200, 40);//x axis, y axis, width, height
+		// movieSearchButton.setBounds((screenWidth / 2), 800, 200, 40);// x axis, y
+		// axis, width, height
+		// movieSearchButton.setLocation(new Point(50, 50));
+		// movieSearchButton.setVerticalAlignment(SwingConstants.CENTER);
 
-        musicSearchButton.setBounds((screenWidth/2)-300,400,200, 40);//x axis, y axis, width, height
+		// musicSearchButton.setBounds((screenWidth / 2) - 300, 800, 200, 40);// x axis,
+		// y axis, width, height
+//		musicSearchButton.setVerticalAlignment(SwingConstants.CENTER);
 
-        this.add(movieSearchButton);
-        this.add(musicSearchButton);
+		this.add(movieSearchButton);
+		this.add(musicSearchButton);
 
         movieSearchButton.addActionListener(e -> MoviePage.main(null));
 
         JFrame frame = new JFrame("octogone Server");
-        frame.setSize(300, 150);
+		frame.setSize(1280, 720);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(this);
-        frame.pack();
+		// frame.pack();
         frame.setVisible(true);
 
     }
 
-    public void paintComponent(Graphics g)
-    {
-        super.paintComponent(g);
-
-        g.drawImage (image, 0, 0, null);
-        repaint();
-    }
+	@Override
+	public void paintComponent(Graphics g) {
+		try (InputStream inputstream = WelcomePage.class.getResourceAsStream(image)) {
+			if (inputstream == null) {
+				System.out.println("File not found");
+				throw new FileNotFoundException("File not found");
+			}
+			Image image = ImageIO.read(inputstream);
+			g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
     public static void main(String[] args)
     {
