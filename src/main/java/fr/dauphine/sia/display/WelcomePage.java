@@ -7,14 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 public class WelcomePage extends JPanel  {
-	private static String image = "movies_music_background.jpg";
+	private static String image = "octogoneServer.jpg";
 
     WelcomePage() {
 
@@ -27,17 +23,22 @@ public class WelcomePage extends JPanel  {
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		Font font = new Font("Times", Font.BOLD, 40);
 		title.setFont(font);
-		title.setForeground(new Color(44, 22, 99));
+		title.setForeground(Color.WHITE);
 
 		JButton movieSearchButton = new JButton("Movie research");// creating instance of JButton
 		movieSearchButton.setBounds((screenWidth / 2) +90 , screenHeight/3, 200, 40);// x axis, y
 		movieSearchButton.setVerticalAlignment(SwingConstants.CENTER);
+		movieSearchButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 5));
+		movieSearchButton.setForeground(Color.BLACK);
+		movieSearchButton.setBackground(Color.WHITE);
 		movieSearchButton.addActionListener(e -> MoviePage.main(null));
 
 		JButton musicSearchButton =new JButton("Music research");//creating instance of JButton
 		musicSearchButton.setBounds((screenWidth/2)-350,screenHeight/3 ,200, 40);//x axis, y axis, width, height
 		musicSearchButton.setVerticalAlignment(SwingConstants.CENTER);
-
+		musicSearchButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 5));
+		musicSearchButton.setForeground(Color.BLACK);
+		musicSearchButton.setBackground(Color.WHITE);
 
 		this.add(movieSearchButton);
 		this.add(musicSearchButton);
