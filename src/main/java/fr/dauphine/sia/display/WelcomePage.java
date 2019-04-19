@@ -1,11 +1,7 @@
 package fr.dauphine.sia.display;
 
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,34 +22,35 @@ public class WelcomePage extends JPanel  {
         int screenWidth = (int)screenSize.getWidth();
         int screenHeight = (int)screenSize.getHeight();
 
-        JLabel userLabel = new JLabel("Welcome To Octogone Server");
-		userLabel.setBounds(screenWidth/2-200, 100, 400, 25);
-		userLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		Font font = new Font("Arial", Font.BOLD, 16);
-		userLabel.setFont(font);
-		this.add(userLabel);
+        JLabel title = new JLabel("Welcome To Octogone Server");
+		title.setBounds(screenWidth/2-400, 90, 700, 100);
+		title.setHorizontalAlignment(SwingConstants.CENTER);
+		Font font = new Font("Times", Font.BOLD, 40);
+		title.setFont(font);
+		title.setForeground(new Color(44, 22, 99));
 
 		JButton movieSearchButton = new JButton("Movie research");// creating instance of JButton
-        JButton musicSearchButton =new JButton("Music research");//creating instance of JButton
-		// movieSearchButton.setBounds((screenWidth / 2), 800, 200, 40);// x axis, y
-		// axis, width, height
-		// movieSearchButton.setLocation(new Point(50, 50));
-		// movieSearchButton.setVerticalAlignment(SwingConstants.CENTER);
+		movieSearchButton.setBounds((screenWidth / 2) +90 , screenHeight/3, 200, 40);// x axis, y
+		movieSearchButton.setVerticalAlignment(SwingConstants.CENTER);
+		movieSearchButton.addActionListener(e -> MoviePage.main(null));
 
-		// musicSearchButton.setBounds((screenWidth / 2) - 300, 800, 200, 40);// x axis,
-		// y axis, width, height
-//		musicSearchButton.setVerticalAlignment(SwingConstants.CENTER);
+		JButton musicSearchButton =new JButton("Music research");//creating instance of JButton
+		musicSearchButton.setBounds((screenWidth/2)-350,screenHeight/3 ,200, 40);//x axis, y axis, width, height
+		musicSearchButton.setVerticalAlignment(SwingConstants.CENTER);
+
 
 		this.add(movieSearchButton);
 		this.add(musicSearchButton);
+		this.add(title);
 
-        movieSearchButton.addActionListener(e -> MoviePage.main(null));
 
         JFrame frame = new JFrame("octogone Server");
+        frame.getContentPane().add(movieSearchButton);
+        frame.getContentPane().add(musicSearchButton);
+        frame.getContentPane().add(title);
 		frame.setSize(1280, 720);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(this);
-		// frame.pack();
         frame.setVisible(true);
 
     }
