@@ -1,8 +1,8 @@
 package fr.dauphine.sia;
 
-import org.junit.jupiter.api.*;
+import static org.junit.Assert.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Test;
 
 public class MoviesTest {
 
