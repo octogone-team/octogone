@@ -2,6 +2,7 @@ package fr.dauphine.sia;
 
 import static org.junit.Assert.*;
 
+import fr.dauphine.sia.search.SearchMovies;
 import org.junit.Test;
 
 public class MoviesTest {

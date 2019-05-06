@@ -18,10 +18,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-
-import fr.dauphine.sia.SeachMusics;
-import fr.dauphine.sia.Parser.MusicModel;
-import fr.dauphine.sia.Parser.ParserMusic;
+import fr.dauphine.sia.search.SearchMusics;
+import fr.dauphine.sia.parser.MusicModel;
+import fr.dauphine.sia.parser.ParserMusic;
 
 public class SearchMusicPage  extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -163,7 +162,7 @@ public class SearchMusicPage  extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(!artist.getText().equals("")) {
-						List<MusicModel> l = ParserMusic.parserArtistModel(SeachMusics.searchByArtistName(artist.getText()));
+						List<MusicModel> l = ParserMusic.parserArtistModel(SearchMusics.searchByArtistName(artist.getText()));
 						displayMusic(l);
 					} else {
 						JOptionPane.showMessageDialog(null, "Veuillez saisir le nom de l'artist");
@@ -174,7 +173,7 @@ public class SearchMusicPage  extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!album.getText().equals("")) {
-					List<MusicModel> l = ParserMusic.parserArtistModel(SeachMusics.searchByAlbumName(artist.getText()));
+					List<MusicModel> l = ParserMusic.parserArtistModel(SearchMusics.searchByAlbumName(artist.getText()));
 					displayMusic(l);
 				} else {
 					JOptionPane.showMessageDialog(null, "Veuillez saisir l'album");
@@ -185,7 +184,7 @@ public class SearchMusicPage  extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!track.getText().equals("")) {
-					List<MusicModel> l = ParserMusic.parserArtistModel(SeachMusics.searchByTrackName(artist.getText()));
+					List<MusicModel> l = ParserMusic.parserArtistModel(SearchMusics.searchByTrackName(artist.getText()));
 					displayMusic(l);
 				} else {
 					JOptionPane.showMessageDialog(null, "Veuillez saisir le track");
@@ -196,7 +195,7 @@ public class SearchMusicPage  extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!label.getText().equals("")) {
-					List<MusicModel> l = ParserMusic.parserArtistModel(SeachMusics.searchByLabelName(artist.getText()));
+					List<MusicModel> l = ParserMusic.parserArtistModel(SearchMusics.searchByLabelName(artist.getText()));
 					displayMusic(l);
 				} else {
 					JOptionPane.showMessageDialog(null, "Veuillez saisir le label");
