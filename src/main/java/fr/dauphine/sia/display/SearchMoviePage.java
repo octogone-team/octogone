@@ -14,7 +14,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
+
 import fr.dauphine.sia.SearchMovies;
 import fr.dauphine.sia.Parser.MovieModel;
 import fr.dauphine.sia.Parser.ParserMovie;
@@ -41,7 +45,8 @@ public class SearchMoviePage extends JFrame {
 	 private JFormattedTextField episod = new JFormattedTextField();
 	 private JButton searchSerieButton = new JButton ("OK");
 	 
-	 private JTextArea resultArea = new JTextArea();
+	 private JTextPane resultArea = new JTextPane();
+	 
  	 
 	 public SearchMoviePage() {
 		 this.setTitle("Search Movies Page");
@@ -57,26 +62,26 @@ public class SearchMoviePage extends JFrame {
 
 	 public void Fenetre(){
 	    movieTitle.setFont(new Font("Arial", Font.BOLD, 14));
-		movieTitle.setPreferredSize(new Dimension(1000, 30));
+		movieTitle.setPreferredSize(new Dimension(200, 30));
 		movieTitle.setForeground(Color.BLUE);
 		year.setFont(new Font("Arial", Font.BOLD, 14));
-		year.setPreferredSize(new Dimension(500, 30));
+		year.setPreferredSize(new Dimension(90, 30));
 		year.setForeground(Color.BLUE);
 		
 		serieTitle.setFont(new Font("Arial", Font.BOLD, 14));
-		serieTitle.setPreferredSize(new Dimension(1000, 30));
+		serieTitle.setPreferredSize(new Dimension(200, 30));
 		serieTitle.setForeground(Color.BLUE);
 		season.setFont(new Font("Arial", Font.BOLD, 14));
-		season.setPreferredSize(new Dimension(255, 30));
+		season.setPreferredSize(new Dimension(50, 30));
 		season.setForeground(Color.BLUE);
 		episod.setFont(new Font("Arial", Font.BOLD, 14));
-		episod.setPreferredSize(new Dimension(255, 30));
+		episod.setPreferredSize(new Dimension(50, 30));
 		episod.setForeground(Color.BLUE);
 		
 		resultArea.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-		resultArea.setPreferredSize(new Dimension(1800, 600));
+		resultArea.setPreferredSize(new Dimension(600, 300));
 		resultArea.setEditable(false);
-		
+	
 		// Search Film Panel
 		GridBagConstraints constraintsPanFilm = new GridBagConstraints();
 		constraintsPanFilm.anchor = GridBagConstraints.WEST;
@@ -139,7 +144,7 @@ public class SearchMoviePage extends JFrame {
 		panresulat.add(resultArea, constraintsPanResult);
 		panresulat.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createEtchedBorder(), "Result"));
-		
+		JScrollPane scroll = new JScrollPane(resultArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	    searchFilmButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -154,11 +159,19 @@ public class SearchMoviePage extends JFrame {
 							JOptionPane.showMessageDialog(null, "Attention! L'année est incorrect");
 						}
 					} else {
-						film=ParserMovie.parserFileJSON(SearchMovies.getSpecificMoviesOrSeriesByTitle(t));
+						if(SearchMovies.getMoviesByTitle(t).contains("Error")){
+							film=ParserMovie.parserFileJSON(SearchMovies.getSpecificMoviesOrSeriesByTitle(t));
+						}
+						else{
+							film=ParserMovie.parserFileJSON(SearchMovies.getMoviesByTitle(t));
+						}
+						
 					}
 					if(film!=null) {
 						System.out.println("Voici la film: "+film);
-						resultArea.setText(film.toString());
+						resultArea.setContentType("text/html");
+						resultArea.setText("<html><image src = '"+film.getPoster()+"' width = '150' height = '150'/></html>");
+						//resultArea.setText(film.toString());
 					} else {
 						JOptionPane.showMessageDialog(null, "Aucun film correspondant");
 					}
@@ -223,8 +236,7 @@ public class SearchMoviePage extends JFrame {
  		pan.add(panSerie, constraintsPan);
  		constraintsPan.gridx = 0;
  		constraintsPan.gridy = 2;
- 		pan.add(panresulat, constraintsPan);
- 		
+ 		pan.add(scroll, constraintsPan);
 	 		
 	    this.add(pan);
 	    this.pack();
