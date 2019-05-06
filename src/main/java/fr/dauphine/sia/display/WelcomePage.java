@@ -5,8 +5,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class WelcomePage extends JFrame {
+	private static final long serialVersionUID = 1L;
 
-    WelcomePage() {
+	WelcomePage() {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 

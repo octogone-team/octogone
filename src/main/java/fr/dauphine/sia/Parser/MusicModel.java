@@ -163,4 +163,15 @@ public class MusicModel {
         album.plot();
         
     }
+    
+    @Override
+    public String toString() {
+    	StringBuilder s = new StringBuilder();
+    	s.append("#_____________________________________________________________\n");
+    	s.append(" id: "+id+" | readable: "+readable+" | title: "+title);
+    	s.append("\n title_short: "+title_short+ "\n link "+link+"\n duration"+ " | rank"+rank);
+    	s.append("\n explicit_lyrics: "+explicit_lyrics+"\n explicit_content_lyrics  "+explicit_content_lyrics);
+    	s.append("\n explicit_content_cover: "+explicit_content_cover+"\n  preview "+preview+"\n type "+type);
+    	return s.toString();
+    }
 }
