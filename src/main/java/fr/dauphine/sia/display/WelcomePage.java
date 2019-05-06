@@ -31,7 +31,7 @@ public class WelcomePage extends JPanel  {
 		movieSearchButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 5));
 		movieSearchButton.setForeground(Color.BLACK);
 		movieSearchButton.setBackground(Color.WHITE);
-		movieSearchButton.addActionListener(e -> MoviePage.main(null));
+		movieSearchButton.addActionListener(e -> SearchMoviePage.main(null));
 
 		JButton musicSearchButton =new JButton("Music research");//creating instance of JButton
 		musicSearchButton.setBounds((screenWidth/2)-350,screenHeight/3 ,200, 40);//x axis, y axis, width, height
@@ -39,6 +39,7 @@ public class WelcomePage extends JPanel  {
 		musicSearchButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 5));
 		musicSearchButton.setForeground(Color.BLACK);
 		musicSearchButton.setBackground(Color.WHITE);
+        musicSearchButton.addActionListener(e -> SearchMusicPage.main(null));
 
 		this.add(movieSearchButton);
 		this.add(musicSearchButton);

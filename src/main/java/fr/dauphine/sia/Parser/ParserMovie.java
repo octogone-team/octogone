@@ -62,7 +62,7 @@ public class ParserMovie {
 	}
 	
 	public static void main(String[] argv) {
-		MovieModel film=ParserMovie.parserFileJSON(SearchMovies.getSpecificMoviesByTitle("X-men"));
+		MovieModel film=ParserMovie.parserFileJSON(SearchMovies.getSpecificMoviesOrSeriesByTitle("X-men"));
 		System.out.println(" voici le film: "+film);
 	}
 

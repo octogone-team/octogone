@@ -25,7 +25,7 @@ public class SearchMovies {
 		return getFilm(query);
 	}
 	
-	public static String getSpecificMoviesByTitle(String title) {
+	public static String getSpecificMoviesOrSeriesByTitle(String title) {
 		String query = null;
 		try {
 			query = String.format("apikey=%s&t=%s", 
@@ -44,18 +44,6 @@ public class SearchMovies {
 						URLEncoder.encode(key, charset),
 						URLEncoder.encode(title, charset), 
 						URLEncoder.encode(Integer.toString(year), charset));
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		return getFilm(query);
-	}
-	
-	public static String getSeriesByTitle(String title) {
-		String query = null;
-		try {
-			query = String.format("apikey=%s&t=%s", 
-						URLEncoder.encode(key, charset),
-						URLEncoder.encode(title, charset));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
