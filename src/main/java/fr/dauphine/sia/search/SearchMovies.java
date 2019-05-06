@@ -1,4 +1,4 @@
-package fr.dauphine.sia;
+package fr.dauphine.sia.search;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package fr.dauphine.sia;
+package fr.dauphine.sia.search;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,7 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class SeachMusics {
+public class SearchMusics {
 
 	private static String API_URL="https://api.deezer.com/search?q=";
 	private static String ARTIST_TAG = "artist:\"";

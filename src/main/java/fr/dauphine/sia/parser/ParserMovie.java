@@ -1,9 +1,9 @@
-package fr.dauphine.sia.Parser;
+package fr.dauphine.sia.parser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import fr.dauphine.sia.SearchMovies;
+import fr.dauphine.sia.search.SearchMovies;
 
 public class ParserMovie {
 
