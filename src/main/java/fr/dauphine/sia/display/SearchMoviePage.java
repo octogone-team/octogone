@@ -170,8 +170,8 @@ public class SearchMoviePage extends JFrame {
 					if(film!=null) {
 						System.out.println("Voici la film: "+film);
 						resultArea.setContentType("text/html");
-						resultArea.setText("<html><image src = '"+film.getPoster()+"' width = '150' height = '150'/></html>");
-						//resultArea.setText(film.toString());
+//						resultArea.setText("<html><image src = '"+film.getPoster()+"' width = '150' height = '150'/></html>");
+						resultArea.setText(film.toString());
 					} else {
 						JOptionPane.showMessageDialog(null, "Aucun film correspondant");
 					}
