@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -15,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+
 import fr.dauphine.sia.SearchMovies;
 import fr.dauphine.sia.Parser.MovieModel;
 import fr.dauphine.sia.Parser.ParserMovie;
@@ -44,15 +46,15 @@ public class SearchMoviePage extends JFrame {
 	 private JTextArea resultArea = new JTextArea();
  	 
 	 public SearchMoviePage() {
-		 this.setTitle("Search Movies Page");
-		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 panFilm.setBackground(Color.white);
-		 panFilm.setLayout(new GridBagLayout()); 
-		 panresulat.setBackground(Color.white);
-		 panresulat.setLayout(new GridBagLayout());
-		 panSerie.setBackground(Color.white);
-		 panSerie.setLayout(new GridBagLayout());
-		 pan.setLayout(new GridBagLayout());
+		this.setTitle("Search Movies Page");
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		panFilm.setBackground(Color.white);
+		panFilm.setLayout(new GridBagLayout());
+		panresulat.setBackground(Color.white);
+		panresulat.setLayout(new GridBagLayout());
+		panSerie.setBackground(Color.white);
+		panSerie.setLayout(new GridBagLayout());
+		pan.setLayout(new GridBagLayout());
 	 }
 
 	 public void Fenetre(){

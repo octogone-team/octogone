@@ -9,6 +9,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -17,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+
 import fr.dauphine.sia.SeachMusics;
 import fr.dauphine.sia.Parser.MusicModel;
 import fr.dauphine.sia.Parser.ParserMusic;
@@ -47,19 +49,19 @@ public class SearchMusicPage  extends JFrame {
 	 private JTextArea resultArea = new JTextArea();
 	 
 	 public SearchMusicPage() {
-		 this.setTitle("Search Musics Page");
-		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 panArtist.setBackground(Color.white);
-		 panArtist.setLayout(new GridBagLayout());
-		 panAlbum.setBackground(Color.white);
-		 panAlbum.setLayout(new GridBagLayout());
-		 panTrack.setBackground(Color.white);
-		 panTrack.setLayout(new GridBagLayout());
-		 panLabel.setBackground(Color.white);
-		 panLabel.setLayout(new GridBagLayout());
-		 panresulat.setBackground(Color.white);
-		 panresulat.setLayout(new GridBagLayout());
-		 pan.setLayout(new GridBagLayout());
+		this.setTitle("Search Musics Page");
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		panArtist.setBackground(Color.white);
+		panArtist.setLayout(new GridBagLayout());
+		panAlbum.setBackground(Color.white);
+		panAlbum.setLayout(new GridBagLayout());
+		panTrack.setBackground(Color.white);
+		panTrack.setLayout(new GridBagLayout());
+		panLabel.setBackground(Color.white);
+		panLabel.setLayout(new GridBagLayout());
+		panresulat.setBackground(Color.white);
+		panresulat.setLayout(new GridBagLayout());
+		pan.setLayout(new GridBagLayout());
 	 }
 	 
 	 private void Fenetre() {
