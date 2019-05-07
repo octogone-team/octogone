@@ -7,6 +7,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -19,9 +22,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 
+import fr.dauphine.sia.SeachMusics;
 import fr.dauphine.sia.SearchMovies;
 import fr.dauphine.sia.Parser.MovieModel;
+import fr.dauphine.sia.Parser.MusicModel;
 import fr.dauphine.sia.Parser.ParserMovie;
+import fr.dauphine.sia.Parser.ParserMusic;
 
 public class SearchMoviePage extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -149,6 +155,7 @@ public class SearchMoviePage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MovieModel film = null;
+				List<MovieModel> films = new ArrayList<>();
 				if (!movieTitle.getText().equals("")) {
 					String t = movieTitle.getText();
 					if(!year.getText().equals("")) {
@@ -163,7 +170,7 @@ public class SearchMoviePage extends JFrame {
 							film=ParserMovie.parserFileJSON(SearchMovies.getSpecificMoviesOrSeriesByTitle(t));
 						}
 						else{
-							film=ParserMovie.parserFileJSON(SearchMovies.getMoviesByTitle(t));
+							films = ParserMovie.parserFilesJSON(SearchMovies.getMoviesByTitle(t));
 						}
 						
 					}
@@ -172,7 +179,11 @@ public class SearchMoviePage extends JFrame {
 						resultArea.setContentType("text/html");
 						resultArea.setText("<html><image src = '"+film.getPoster()+"' width = '150' height = '150'/></html>");
 						//resultArea.setText(film.toString());
-					} else {
+					}
+					else if (!films.isEmpty()){
+						
+					}
+					else {
 						JOptionPane.showMessageDialog(null, "Aucun film correspondant");
 					}
 				} else {
