@@ -66,4 +66,8 @@ public class MovieModel {
 //				+ BoxOffice + ",\nProduction=" + Production + ",\nWebsite=" + Website + ",\nResponse=" + Response + "]";
 	}
 
+	public String getPoster() {
+		return values.get("Poster");
+	}
+
 }
