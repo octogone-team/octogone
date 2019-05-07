@@ -5,12 +5,14 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -21,6 +23,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import fr.dauphine.sia.SeachMusics;
 import fr.dauphine.sia.SearchMovies;
@@ -31,6 +37,10 @@ import fr.dauphine.sia.Parser.ParserMusic;
 
 public class SearchMoviePage extends JFrame {
 	private static final long serialVersionUID = 1L;
+	
+	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    int screenWidth = (int)screenSize.getWidth();
+    int screenHeight = (int)screenSize.getHeight();
 	
 	 private JPanel panFilm = new JPanel();
 	 private JPanel panSerie = new JPanel();
@@ -68,24 +78,24 @@ public class SearchMoviePage extends JFrame {
 
 	 public void Fenetre(){
 	    movieTitle.setFont(new Font("Arial", Font.BOLD, 14));
-		movieTitle.setPreferredSize(new Dimension(200, 30));
+		movieTitle.setPreferredSize(new Dimension(screenWidth-1000, 30));
 		movieTitle.setForeground(Color.BLUE);
 		year.setFont(new Font("Arial", Font.BOLD, 14));
-		year.setPreferredSize(new Dimension(90, 30));
+		year.setPreferredSize(new Dimension(screenWidth-1400, 30));
 		year.setForeground(Color.BLUE);
 		
 		serieTitle.setFont(new Font("Arial", Font.BOLD, 14));
-		serieTitle.setPreferredSize(new Dimension(200, 30));
+		serieTitle.setPreferredSize(new Dimension(screenWidth-1000, 30));
 		serieTitle.setForeground(Color.BLUE);
 		season.setFont(new Font("Arial", Font.BOLD, 14));
-		season.setPreferredSize(new Dimension(50, 30));
+		season.setPreferredSize(new Dimension(screenWidth-1658, 30));
 		season.setForeground(Color.BLUE);
 		episod.setFont(new Font("Arial", Font.BOLD, 14));
-		episod.setPreferredSize(new Dimension(50, 30));
+		episod.setPreferredSize(new Dimension(screenWidth-1658, 30));
 		episod.setForeground(Color.BLUE);
 		
 		resultArea.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-		resultArea.setPreferredSize(new Dimension(600, 300));
+		resultArea.setPreferredSize(new Dimension(screenWidth-200, screenHeight-500));
 		resultArea.setEditable(false);
 	
 		// Search Film Panel
@@ -174,18 +184,30 @@ public class SearchMoviePage extends JFrame {
 						}
 						
 					}
+					StringBuilder s = new StringBuilder();
 					if(film!=null) {
-						System.out.println("Voici la film: "+film);
-						resultArea.setContentType("text/html");
-						resultArea.setText("<html><image src = '"+film.getPoster()+"' width = '150' height = '150'/></html>");
-						//resultArea.setText(film.toString());
+						films.add(film);
 					}
-					else if (!films.isEmpty()){
-						StringBuilder s = new StringBuilder();
+					if (!films.isEmpty()){
 						s.append("<html>");
 						for (MovieModel f : films) {
-							s.append("<image src = '"+f.getPoster()+"' width = '150' height = '150'/>");
+							s.append("<table>");
+								s.append("<tr>");
+									s.append("<td style=\"text-align:left\">");
+										s.append("<img src = \""+f.getPoster()+"\" style=\"width:150px;height:150px;\"/>");
+									s.append("</td>");
+									
+									s.append("<td>");
+										s.append("<p align=\"center\" style=\"font-size:50px; font-weight:bold;\">"+f.getAttribute("Title")+"</p>");
+										s.append("<p>");
+										s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic; color:blue;\">Date de sortie : </span>");
+										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+f.getAttribute("Released")+"</span>");
+										s.append("</p>");
+									s.append("</td>");
+								s.append("</tr>");
+							s.append("</table>");
 							s.append("<br>");
+							s.append("<HR>");
 						}
 						s.append("</html>");
 						resultArea.setContentType("text/html");
