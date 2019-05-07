@@ -181,7 +181,15 @@ public class SearchMoviePage extends JFrame {
 						//resultArea.setText(film.toString());
 					}
 					else if (!films.isEmpty()){
-						
+						StringBuilder s = new StringBuilder();
+						s.append("<html>");
+						for (MovieModel f : films) {
+							s.append("<image src = '"+f.getPoster()+"' width = '150' height = '150'/>");
+							s.append("<br>");
+						}
+						s.append("</html>");
+						resultArea.setContentType("text/html");
+						resultArea.setText(s.toString());
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "Aucun film correspondant");
