@@ -35,13 +35,15 @@ public class ParserMovie {
 			}
 			
 			// A changer peut-être pour parser les Ratings
-			JSONArray jsonArray = jsonObject.getJSONArray("Ratings");
-			if(jsonArray!=null) {
-				for(int i=0; i<jsonArray.length(); i++) {
-					String source = jsonArray.getJSONObject(i).getString("Source");
-					String value = jsonArray.getJSONObject(i).getString("Value");
-					Rating rating = new Rating(source, value);
-					movie.addRate(rating);
+			if(jsonObject.has("Rating")) {
+				JSONArray jsonArray = jsonObject.getJSONArray("Ratings");
+				if(jsonArray!=null) {
+					for(int i=0; i<jsonArray.length(); i++) {
+						String source = jsonArray.getJSONObject(i).getString("Source");
+						String value = jsonArray.getJSONObject(i).getString("Value");
+						Rating rating = new Rating(source, value);
+						movie.addRate(rating);
+					}
 				}
 			}
 			

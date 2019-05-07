@@ -66,4 +66,16 @@ private static Logger LOGGER = Logger.getLogger(MovieModel.class);
 //				+ ",\nimdbVotes=" + imdbVotes + ",\nimdbID=" + imdbID + ",\nType=" + Type + ",\nDVD=" + DVD + ",\nBoxOffice="
 //				+ BoxOffice + ",\nProduction=" + Production + ",\nWebsite=" + Website + ",\nResponse=" + Response + "]";
 	}
+	
+	@Override
+	public boolean equals(Object object) {
+		if(!(object instanceof MovieModel)) {
+			return false;
+		}
+		
+		MovieModel movie=(MovieModel) object;
+		
+		
+		return values.equals(movie.values);
+	}
 }

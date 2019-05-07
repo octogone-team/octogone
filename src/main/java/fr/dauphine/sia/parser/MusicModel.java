@@ -174,4 +174,15 @@ public class MusicModel {
     	s.append("\n explicit_content_cover: "+explicit_content_cover+"\n  preview "+preview+"\n type "+type);
     	return s.toString();
     }
+    
+    @Override
+    public boolean equals(Object object) {
+    	if(!(object instanceof MusicModel)) {
+    		return false;
+    	}
+    	
+    	MusicModel music= (MusicModel) object;
+    	
+    	return id==music.id;
+    }
 }
