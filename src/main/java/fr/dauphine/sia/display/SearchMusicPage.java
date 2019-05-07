@@ -9,6 +9,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -17,20 +18,21 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+
 import fr.dauphine.sia.SeachMusics;
 import fr.dauphine.sia.Parser.MusicModel;
 import fr.dauphine.sia.Parser.ParserMusic;
 
 public class SearchMusicPage  extends JFrame {
 	private static final long serialVersionUID = 1L;
-	
+
 	private JPanel panArtist = new JPanel();
 	private JPanel panAlbum = new JPanel();
 	private JPanel panTrack = new JPanel();
 	private JPanel panLabel = new JPanel();
 	private JPanel panresulat = new JPanel();
 	private JPanel pan = new JPanel();
-	
+
 	 private JLabel labelArtist = new JLabel("Artist Name : ");
 	 private JFormattedTextField artist = new JFormattedTextField();
 	 private JButton searchButton1 = new JButton ("OK");
@@ -45,25 +47,25 @@ public class SearchMusicPage  extends JFrame {
 	 private JButton searchButton4 = new JButton ("OK");
 	 
 	 private JTextArea resultArea = new JTextArea();
-	 
+
 	 public SearchMusicPage() {
-		 this.setTitle("Search Musics Page");
-		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 panArtist.setBackground(Color.white);
-		 panArtist.setLayout(new GridBagLayout());
-		 panAlbum.setBackground(Color.white);
-		 panAlbum.setLayout(new GridBagLayout());
-		 panTrack.setBackground(Color.white);
-		 panTrack.setLayout(new GridBagLayout());
-		 panLabel.setBackground(Color.white);
-		 panLabel.setLayout(new GridBagLayout());
-		 panresulat.setBackground(Color.white);
-		 panresulat.setLayout(new GridBagLayout());
-		 pan.setLayout(new GridBagLayout());
+		this.setTitle("Search Musics Page");
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		panArtist.setBackground(Color.white);
+		panArtist.setLayout(new GridBagLayout());
+		panAlbum.setBackground(Color.white);
+		panAlbum.setLayout(new GridBagLayout());
+		panTrack.setBackground(Color.white);
+		panTrack.setLayout(new GridBagLayout());
+		panLabel.setBackground(Color.white);
+		panLabel.setLayout(new GridBagLayout());
+		panresulat.setBackground(Color.white);
+		panresulat.setLayout(new GridBagLayout());
+		pan.setLayout(new GridBagLayout());
 	 }
 	 
 	 private void Fenetre() {
-		 
+
 		resultArea.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 14));
 		resultArea.setPreferredSize(new Dimension(1800, 600));
 		resultArea.setEditable(false);
@@ -156,7 +158,7 @@ public class SearchMusicPage  extends JFrame {
 		panresulat.add(resultArea, constraintsPanResult);
 		panresulat.setBorder(BorderFactory.createTitledBorder(
 						BorderFactory.createEtchedBorder(), "Result"));
-		 
+
 		searchButton1.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -221,7 +223,7 @@ public class SearchMusicPage  extends JFrame {
  		constraintsPan.gridx = 0;
  		constraintsPan.gridy = 4;
  		pan.add(panresulat, constraintsPan);
- 		
+
 	    this.add(pan);
 	    this.pack();
 	    this.setVisible(true);
