@@ -10,9 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -20,20 +18,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-
-import fr.dauphine.sia.SeachMusics;
 import fr.dauphine.sia.SearchMovies;
 import fr.dauphine.sia.Parser.MovieModel;
-import fr.dauphine.sia.Parser.MusicModel;
 import fr.dauphine.sia.Parser.ParserMovie;
-import fr.dauphine.sia.Parser.ParserMusic;
 
 public class SearchMoviePage extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -42,24 +30,20 @@ public class SearchMoviePage extends JFrame {
     int screenWidth = (int)screenSize.getWidth();
     int screenHeight = (int)screenSize.getHeight();
 	
-	 private JPanel panFilm = new JPanel();
+	 private JPanel panMovie = new JPanel();
 	 private JPanel panSerie = new JPanel();
 	 private JPanel panresulat = new JPanel();
 	 private JPanel pan = new JPanel();
 	 
-	 private JLabel labelFilm = new JLabel("Movie Title : ");
+	 private JLabel labelMovie = new JLabel("Movie Title : ");
 	 private JFormattedTextField movieTitle = new JFormattedTextField();
 	 private JLabel labelYear = new JLabel("Year's release of movie : ");
 	 private JFormattedTextField year = new JFormattedTextField();
-	 private JButton searchFilmButton = new JButton ("OK");
-	 
-	 private JLabel labelSerie = new JLabel("Serie Title : ");
-	 private JFormattedTextField serieTitle = new JFormattedTextField();
-	 private JLabel labelSeason = new JLabel("Season : ");
+	 private JLabel labelSeason = new JLabel("Season (if serie) : ");
 	 private JFormattedTextField season = new JFormattedTextField();
-	 private JLabel labelEpisod = new JLabel("Episod : ");
+	 private JLabel labelEpisod = new JLabel("Episod (if serie) : ");
 	 private JFormattedTextField episod = new JFormattedTextField();
-	 private JButton searchSerieButton = new JButton ("OK");
+	 private JButton searchFilmButton = new JButton ("OK");
 	 
 	 private JTextPane resultArea = new JTextPane();
 	 
@@ -67,8 +51,8 @@ public class SearchMoviePage extends JFrame {
 	 public SearchMoviePage() {
 		 this.setTitle("Search Movies Page");
 		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 panFilm.setBackground(Color.white);
-		 panFilm.setLayout(new GridBagLayout()); 
+		 panMovie.setBackground(Color.white);
+		 panMovie.setLayout(new GridBagLayout()); 
 		 panresulat.setBackground(Color.white);
 		 panresulat.setLayout(new GridBagLayout());
 		 panSerie.setBackground(Color.white);
@@ -78,79 +62,57 @@ public class SearchMoviePage extends JFrame {
 
 	 public void Fenetre(){
 	    movieTitle.setFont(new Font("Arial", Font.BOLD, 14));
-		movieTitle.setPreferredSize(new Dimension(screenWidth-1000, 30));
+		movieTitle.setPreferredSize(new Dimension(screenWidth-1340, 30));
 		movieTitle.setForeground(Color.BLUE);
 		year.setFont(new Font("Arial", Font.BOLD, 14));
-		year.setPreferredSize(new Dimension(screenWidth-1400, 30));
+		year.setPreferredSize(new Dimension(screenWidth-1600, 30));
 		year.setForeground(Color.BLUE);
-		
-		serieTitle.setFont(new Font("Arial", Font.BOLD, 14));
-		serieTitle.setPreferredSize(new Dimension(screenWidth-1000, 30));
-		serieTitle.setForeground(Color.BLUE);
 		season.setFont(new Font("Arial", Font.BOLD, 14));
-		season.setPreferredSize(new Dimension(screenWidth-1658, 30));
+		season.setPreferredSize(new Dimension(screenWidth-1800, 30));
 		season.setForeground(Color.BLUE);
 		episod.setFont(new Font("Arial", Font.BOLD, 14));
-		episod.setPreferredSize(new Dimension(screenWidth-1658, 30));
+		episod.setPreferredSize(new Dimension(screenWidth-1800, 30));
 		episod.setForeground(Color.BLUE);
 		
 		resultArea.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 14));
 		resultArea.setPreferredSize(new Dimension(screenWidth-200, screenHeight-500));
 		resultArea.setEditable(false);
 	
-		// Search Film Panel
-		GridBagConstraints constraintsPanFilm = new GridBagConstraints();
-		constraintsPanFilm.anchor = GridBagConstraints.WEST;
-		constraintsPanFilm.insets = new Insets(10, 10, 10, 10);
-		constraintsPanFilm.gridx = 0;
-		constraintsPanFilm.gridy = 0;		
-		panFilm.add(labelFilm, constraintsPanFilm);
-		constraintsPanFilm.gridx = 1;
-		constraintsPanFilm.gridy = 0;
-		panFilm.add(movieTitle, constraintsPanFilm);
-		constraintsPanFilm.gridx = 2;
-		constraintsPanFilm.gridy = 0;		
-		panFilm.add(labelYear, constraintsPanFilm);
-		constraintsPanFilm.gridx = 3;
-		constraintsPanFilm.gridy = 0;
-		panFilm.add(year, constraintsPanFilm);
-	    constraintsPanFilm.gridx = 0;
-		constraintsPanFilm.gridy = 2;
-		constraintsPanFilm.gridwidth = 4;
-		constraintsPanFilm.anchor = GridBagConstraints.CENTER;
-		panFilm.add(searchFilmButton, constraintsPanFilm);
-		panFilm.setBorder(BorderFactory.createTitledBorder(
+		// Search Movie Panel
+		GridBagConstraints constraintsPanMovie = new GridBagConstraints();
+		constraintsPanMovie.anchor = GridBagConstraints.WEST;
+		constraintsPanMovie.insets = new Insets(10, 10, 10, 10);
+		constraintsPanMovie.gridx = 0;
+		constraintsPanMovie.gridy = 0;		
+		panMovie.add(labelMovie, constraintsPanMovie);
+		constraintsPanMovie.gridx = 1;
+		constraintsPanMovie.gridy = 0;
+		panMovie.add(movieTitle, constraintsPanMovie);
+		constraintsPanMovie.gridx = 2;
+		constraintsPanMovie.gridy = 0;		
+		panMovie.add(labelYear, constraintsPanMovie);
+		constraintsPanMovie.gridx = 3;
+		constraintsPanMovie.gridy = 0;
+		panMovie.add(year, constraintsPanMovie);
+		constraintsPanMovie.gridx = 4;
+		constraintsPanMovie.gridy = 0;
+		panMovie.add(labelSeason, constraintsPanMovie);
+		constraintsPanMovie.gridx = 5;
+		constraintsPanMovie.gridy = 0;
+		panMovie.add(season, constraintsPanMovie);
+		constraintsPanMovie.gridx = 6;
+		constraintsPanMovie.gridy = 0;
+		panMovie.add(labelEpisod, constraintsPanMovie);
+		constraintsPanMovie.gridx = 7;
+		constraintsPanMovie.gridy = 0;
+		panMovie.add(episod, constraintsPanMovie);
+	    constraintsPanMovie.gridx = 0;
+		constraintsPanMovie.gridy = 2;
+		constraintsPanMovie.gridwidth = 10;
+		constraintsPanMovie.anchor = GridBagConstraints.CENTER;
+		panMovie.add(searchFilmButton, constraintsPanMovie);
+		panMovie.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createEtchedBorder(), "Search Films"));
-		
-		// Search Serie Panel
-		GridBagConstraints constraintsPanSerie = new GridBagConstraints();
-		constraintsPanSerie.anchor = GridBagConstraints.WEST;
-		constraintsPanSerie.insets = new Insets(10, 10, 10, 10);
-		constraintsPanSerie.gridx = 0;
-		constraintsPanSerie.gridy = 0;		
-		panSerie.add(labelSerie, constraintsPanSerie);
-		constraintsPanSerie.gridx = 1;
-		constraintsPanSerie.gridy = 0;
-		panSerie.add(serieTitle, constraintsPanSerie);
-		constraintsPanSerie.gridx = 2;
-		constraintsPanSerie.gridy = 0;		
-		panSerie.add(labelSeason, constraintsPanSerie);
-		constraintsPanSerie.gridx = 3;
-		constraintsPanSerie.gridy = 0;
-		panSerie.add(season, constraintsPanSerie);
-		constraintsPanSerie.gridx = 4;
-		constraintsPanSerie.gridy = 0;		
-		panSerie.add(labelEpisod, constraintsPanSerie);
-		constraintsPanSerie.gridx = 5;
-		constraintsPanSerie.gridy = 0;
-		panSerie.add(episod, constraintsPanSerie);
-		constraintsPanSerie.gridx = 0;
-		constraintsPanSerie.gridy = 2;
-		constraintsPanSerie.gridwidth = 6;
-		constraintsPanSerie.anchor = GridBagConstraints.CENTER;
-		panSerie.add(searchSerieButton, constraintsPanSerie);
-		panSerie.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createEtchedBorder(), "Search Series"));
 		
 		//Result Panel
 		GridBagConstraints constraintsPanResult = new GridBagConstraints();
@@ -164,44 +126,109 @@ public class SearchMoviePage extends JFrame {
 	    searchFilmButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MovieModel film = null;
-				List<MovieModel> films = new ArrayList<>();
+				MovieModel movie = null;
+				List<MovieModel> movies = new ArrayList<>();
+				int y = -1;
+				int ep = -1;
+				int seas = -1;
 				if (!movieTitle.getText().equals("")) {
 					String t = movieTitle.getText();
 					if(!year.getText().equals("")) {
 						try {
-							int y = Integer.parseInt(year.getText());
-							film=ParserMovie.parserFileJSON(SearchMovies.getMoviesByYear(t, y));
+							y = Integer.parseInt(year.getText());
 						} catch (NumberFormatException e1) {
 							JOptionPane.showMessageDialog(null, "Attention! L'année est incorrect");
 						}
-					} else {
+					}
+					else if(!episod.getText().equals("")) {
+						try {
+							ep = Integer.parseInt(episod.getText());
+						} catch (NumberFormatException e1) {
+							JOptionPane.showMessageDialog(null, "Attention! L'épisode est incorrect");
+						}
+					}
+					else if(!season.getText().equals("")) {
+						try {
+							seas = Integer.parseInt(season.getText());
+						} catch (NumberFormatException e1) {
+							JOptionPane.showMessageDialog(null, "Attention! La saison est incorrect");
+						}
+					}
+					if(seas==-1&&ep!=-1) {
+						JOptionPane.showMessageDialog(null, "Attention! Quelle saison vous intéresse?");
+					}
+					
+					//SEARCH
+					if(y==-1&&seas==-1&&ep==-1) {
 						if(SearchMovies.getMoviesByTitle(t).contains("Error")){
-							film=ParserMovie.parserFileJSON(SearchMovies.getSpecificMoviesOrSeriesByTitle(t));
+							movie=ParserMovie.parserFileJSON(SearchMovies.getSpecificMoviesOrSeriesByTitle(t));
+						} else {
+							movies = ParserMovie.parserFilesJSON(SearchMovies.getMoviesByTitle(t));
 						}
-						else{
-							films = ParserMovie.parserFilesJSON(SearchMovies.getMoviesByTitle(t));
-						}
-						
+					} 
+					else if (y!=-1&&seas==-1&&ep==-1) {
+						movies=ParserMovie.parserFilesJSON(SearchMovies.getMoviesByYear(t, y));
 					}
+					else if(seas!=-1) {
+						if(ep!=-1) {
+							if(y!=-1) {
+								movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesByEpisodeByYear(t, seas, ep, y));
+							}else {
+								movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesByEpisode(t, seas, ep));
+							}
+						} else {
+							if(y!=-1) {
+								movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesBySeasonByYear(t, seas, y));
+							}else {
+								movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesBySeason(t, seas));
+							}
+						}
+					}
+					
+					//Display Movies
 					StringBuilder s = new StringBuilder();
-					if(film!=null) {
-						films.add(film);
+					if(movie!=null) {
+						System.out.println();
+						movies.add(movie);
 					}
-					if (!films.isEmpty()){
+					if (!movies.isEmpty()){
 						s.append("<html>");
-						for (MovieModel f : films) {
+						for (MovieModel m : movies) {
 							s.append("<table>");
 								s.append("<tr>");
 									s.append("<td style=\"text-align:left\">");
-										s.append("<img src = \""+f.getPoster()+"\" style=\"width:150px;height:150px;\"/>");
+										s.append("<img src = \""+m.getPoster()+"\" style=\"width:150px;height:150px;\"/>");
 									s.append("</td>");
 									
 									s.append("<td>");
-										s.append("<p align=\"center\" style=\"font-size:50px; font-weight:bold;\">"+f.getAttribute("Title")+"</p>");
+										s.append("<p align=\"center\" style=\"font-size:50px; font-weight:bold;\">"+m.getAttribute("Title"));
+										s.append("<span style=\"font-size:15px;\"> - "+m.getAttribute("Runtime")+"</span>");
+										s.append("<br>");
+										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+m.getAttribute("Plot")+"</span>");
+										s.append("</p>");
 										s.append("<p>");
 										s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic; color:blue;\">Date de sortie : </span>");
-										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+f.getAttribute("Released")+"</span>");
+										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+m.getAttribute("Released")+"</span>");
+										s.append("</p>");
+										s.append("<p>");
+										s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic; color:blue;\">Genre : </span>");
+										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+m.getAttribute("Genre")+"</span>");
+										s.append("</p>");
+										s.append("<p>");
+										s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic; color:blue;\">Langue : </span>");
+										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+m.getAttribute("Language")+"</span>");
+										s.append("</p>");
+										s.append("<p>");
+										s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic; color:blue;\">Producteur : </span>");
+										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+m.getAttribute("Director")+"</span>");
+										s.append("</p>");
+										s.append("<p>");
+										s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic; color:blue;\">Scénariste : </span>");
+										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+m.getAttribute("Writer")+"</span>");
+										s.append("</p>");
+										s.append("<p>");
+										s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic; color:blue;\">Acteur : </span>");
+										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+m.getAttribute("Actors")+"</span>");
 										s.append("</p>");
 									s.append("</td>");
 								s.append("</tr>");
@@ -217,61 +244,18 @@ public class SearchMoviePage extends JFrame {
 						JOptionPane.showMessageDialog(null, "Aucun film correspondant");
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Attention! Quel est le titre du film");
+					JOptionPane.showMessageDialog(null, "Attention! Veuillez saisir le titre du film");
 				}
 			}
 		});
-	    
-	    searchSerieButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (!serieTitle.getText().equals("")) {
-					MovieModel serie=null;
-					String t = serieTitle.getText();
-					if(season.getText().equals("")&&episod.getText().equals("")) {
-						serie=ParserMovie.parserFileJSON(SearchMovies.getSpecificMoviesOrSeriesByTitle(t));
-					} 
-					else if(!season.getText().equals("")) {
-						try{
-							int s = Integer.parseInt(season.getText());
-							if(!episod.getText().equals("")) {
-								try {
-									int ep = Integer.parseInt(episod.getText());
-									serie=ParserMovie.parserFileJSON(SearchMovies.getSeriesByEpisode(t, s, ep));
-								} catch (NumberFormatException e2) {
-									JOptionPane.showMessageDialog(null, "Attention! L'épisode est incorrect");
-								}
-							}else {
-								serie=ParserMovie.parserFileJSON(SearchMovies.getSeriesBySeason(t, s));
-							}
-					    } 
-						catch (NumberFormatException e1) {
-							JOptionPane.showMessageDialog(null, "Attention! La saison est incorrect");
-					    }
-					}
-					else {
-						JOptionPane.showMessageDialog(null, "Attention! Quel saison vous intéresse?");
-					}
-					if(serie!=null) {
-						System.out.println("Voici la série: "+serie);
-						resultArea.setText(serie.toString());
-					} else {
-						JOptionPane.showMessageDialog(null, "Aucune serie correspondante");
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "Attention! Quel est le titre de la série");
-				}
-			}
-		});
-	    
-	   
+
 	    // Page Panel
  		GridBagConstraints constraintsPan = new GridBagConstraints();
  		constraintsPan.anchor = GridBagConstraints.WEST;
  		constraintsPan.insets = new Insets(10, 10, 10, 10);
  		constraintsPan.gridx = 0;
  		constraintsPan.gridy = 0;
- 		pan.add(panFilm, constraintsPan);
+ 		pan.add(panMovie, constraintsPan);
  		constraintsPan.gridx = 0;
  		constraintsPan.gridy = 1;
  		pan.add(panSerie, constraintsPan);
