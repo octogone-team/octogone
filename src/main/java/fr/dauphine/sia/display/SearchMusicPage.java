@@ -1,27 +1,21 @@
 package fr.dauphine.sia.display;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+
 import fr.dauphine.sia.SeachMusics;
 import fr.dauphine.sia.Parser.MusicModel;
 import fr.dauphine.sia.Parser.ParserMusic;
 
-public class SearchMusicPage  extends JFrame {
+public class SearchMusicPage extends JPanel {
+	private static String image = "music_search.jpg";
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panArtist = new JPanel();
@@ -29,9 +23,8 @@ public class SearchMusicPage  extends JFrame {
 	private JPanel panTrack = new JPanel();
 	private JPanel panLabel = new JPanel();
 	private JPanel panresulat = new JPanel();
-	private JPanel pan = new JPanel();
 
-	 private JLabel labelArtist = new JLabel("Artist Name : ");
+	 private JLabel labelArtist = new JLabel("Name : ");
 	 private JFormattedTextField artist = new JFormattedTextField();
 	 private JButton searchButton1 = new JButton ("OK");
 	 private JLabel labelAlbum = new JLabel("Album : ");
@@ -45,43 +38,52 @@ public class SearchMusicPage  extends JFrame {
 	 private JButton searchButton4 = new JButton ("OK");
 
 	 private JTextArea resultArea = new JTextArea();
+	 private JFrame jFrame = new JFrame();
 
 	 public SearchMusicPage() {
-		 this.setTitle("Search Musics Page");
-		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 jFrame.setTitle("Search Musics Page");
+		 jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 panArtist.setBackground(Color.white);
 		 panArtist.setLayout(new GridBagLayout());
+		 panArtist.setOpaque(false);
 		 panAlbum.setBackground(Color.white);
 		 panAlbum.setLayout(new GridBagLayout());
+		 panAlbum.setOpaque(false);
 		 panTrack.setBackground(Color.white);
 		 panTrack.setLayout(new GridBagLayout());
+		 panTrack.setOpaque(false);
 		 panLabel.setBackground(Color.white);
 		 panLabel.setLayout(new GridBagLayout());
-		 panresulat.setBackground(Color.white);
+		 panLabel.setOpaque(false);
 		 panresulat.setLayout(new GridBagLayout());
-		 pan.setLayout(new GridBagLayout());
+		 panresulat.setOpaque(false);
+		 this.setLayout(new GridBagLayout());
 	 }
 
 	 private void Fenetre() {
 
+		 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		 int screenWidth = (int)screenSize.getWidth();
+		 int screenHeight = (int)screenSize.getHeight();
+		resultArea.setOpaque(false);
 		resultArea.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-		resultArea.setPreferredSize(new Dimension(1800, 600));
+		resultArea.setPreferredSize(new Dimension(screenWidth-120, screenHeight-500));
 		resultArea.setEditable(false);
 
 		artist.setFont(new Font("Arial", Font.BOLD, 14));
-		artist.setPreferredSize(new Dimension(1600, 30));
+		artist.setPreferredSize(new Dimension(screenWidth-300, 30));
 		artist.setForeground(Color.BLUE);
 
 		album.setFont(new Font("Arial", Font.BOLD, 14));
-		album.setPreferredSize(new Dimension(1630, 30));
+		album.setPreferredSize(new Dimension(screenWidth-300, 30));
 		album.setForeground(Color.BLUE);
 
 		track.setFont(new Font("Arial", Font.BOLD, 14));
-		track.setPreferredSize(new Dimension(1630, 30));
+		track.setPreferredSize(new Dimension(screenWidth-300, 30));
 		track.setForeground(Color.BLUE);
 
 		label.setFont(new Font("Arial", Font.BOLD, 14));
-		label.setPreferredSize(new Dimension(1630, 30));
+		label.setPreferredSize(new Dimension(screenWidth-300, 30));
 		label.setForeground(Color.BLUE);
 
 		// Search Music by artist panel
@@ -153,11 +155,11 @@ public class SearchMusicPage  extends JFrame {
 		constraintsPanResult.anchor = GridBagConstraints.WEST;
 		constraintsPanResult.gridx = 0;
 		constraintsPanResult.gridy = 0;
-		panresulat.add(resultArea, constraintsPanResult);
-		panresulat.setBorder(BorderFactory.createTitledBorder(
+		 panresulat.add(resultArea, constraintsPanResult);
+		 panresulat.setBorder(BorderFactory.createTitledBorder(
 						BorderFactory.createEtchedBorder(), "Result"));
-
-		searchButton1.addActionListener(new ActionListener() {
+		 JScrollPane scroll = new JScrollPane(resultArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		 searchButton1.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(!artist.getText().equals("")) {
@@ -208,23 +210,22 @@ public class SearchMusicPage  extends JFrame {
  		constraintsPan.insets = new Insets(10, 10, 10, 10);
  		constraintsPan.gridx = 0;
  		constraintsPan.gridy = 0;
- 		pan.add(panArtist, constraintsPan);
+ 		this.add(panArtist, constraintsPan);
  		constraintsPan.gridx = 0;
  		constraintsPan.gridy = 1;
- 		pan.add(panAlbum, constraintsPan);
+ 		this.add(panAlbum, constraintsPan);
  		constraintsPan.gridx = 0;
  		constraintsPan.gridy = 2;
- 		pan.add(panTrack, constraintsPan);
+ 		this.add(panTrack, constraintsPan);
  		constraintsPan.gridx = 0;
  		constraintsPan.gridy = 3;
- 		pan.add(panLabel, constraintsPan);
+ 		this.add(panLabel, constraintsPan);
  		constraintsPan.gridx = 0;
  		constraintsPan.gridy = 4;
- 		pan.add(panresulat, constraintsPan);
-
-	    this.add(pan);
-	    this.pack();
-	    this.setVisible(true);
+		this.add(scroll, constraintsPan);
+		jFrame.add(this);
+	    jFrame.pack();
+	    jFrame.setVisible(true);
 	 }
 
 	 private void displayMusic(List<MusicModel> l) {
@@ -245,4 +246,18 @@ public class SearchMusicPage  extends JFrame {
 			SearchMusicPage p = new SearchMusicPage();
 			p.Fenetre();
      }
+
+	@Override
+	public void paintComponent(Graphics g) {
+		try (InputStream inputstream = WelcomePage.class.getResourceAsStream(image)) {
+			if (inputstream == null) {
+				System.out.println("File not found");
+				throw new FileNotFoundException("File not found");
+			}
+			Image image = ImageIO.read(inputstream);
+			g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
