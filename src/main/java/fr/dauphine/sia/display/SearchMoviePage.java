@@ -62,20 +62,20 @@ public class SearchMoviePage extends JFrame {
 
 	 public void Fenetre(){
 	    movieTitle.setFont(new Font("Arial", Font.BOLD, 14));
-		movieTitle.setPreferredSize(new Dimension(2*screenWidth/10, 30));
+		movieTitle.setPreferredSize(new Dimension(2*screenWidth/11, 30));
 		movieTitle.setForeground(Color.BLUE);
 		year.setFont(new Font("Arial", Font.BOLD, 14));
-		year.setPreferredSize(new Dimension(2*screenWidth/11, 30));
+		year.setPreferredSize(new Dimension(screenWidth/10, 30));
 		year.setForeground(Color.BLUE);
 		season.setFont(new Font("Arial", Font.BOLD, 14));
-		season.setPreferredSize(new Dimension(1*screenWidth/9, 30));
+		season.setPreferredSize(new Dimension(screenWidth/12, 30));
 		season.setForeground(Color.BLUE);
 		episod.setFont(new Font("Arial", Font.BOLD, 14));
-		episod.setPreferredSize(new Dimension(1*screenWidth/9, 30));
+		episod.setPreferredSize(new Dimension(screenWidth/12, 30));
 		episod.setForeground(Color.BLUE);
 		
 		resultArea.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-		resultArea.setPreferredSize(new Dimension(9*screenWidth/10, 2*screenHeight/3));
+		resultArea.setPreferredSize(new Dimension(12*screenWidth/13, screenHeight/2));
 		resultArea.setEditable(false);
 	
 		// Search Movie Panel
