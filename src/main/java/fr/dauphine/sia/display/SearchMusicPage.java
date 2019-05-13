@@ -1,5 +1,9 @@
 package fr.dauphine.sia.display;
 
+import fr.dauphine.sia.parser.MusicModel;
+import fr.dauphine.sia.parser.ParserMusic;
+import fr.dauphine.sia.search.SearchMusics;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,9 +14,6 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import fr.dauphine.sia.SeachMusics;
-import fr.dauphine.sia.Parser.MusicModel;
-import fr.dauphine.sia.Parser.ParserMusic;
 
 public class SearchMusicPage extends JPanel {
 	private static String image = "music_search.jpg";
@@ -163,7 +164,7 @@ public class SearchMusicPage extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(!artist.getText().equals("")) {
-						List<MusicModel> l = ParserMusic.parserArtistModel(SeachMusics.searchByArtistName(artist.getText()));
+						List<MusicModel> l = ParserMusic.parserArtistModel(SearchMusics.searchByArtistName(artist.getText()));
 						displayMusic(l);
 					} else {
 						JOptionPane.showMessageDialog(null, "Veuillez saisir le nom de l'artist");
@@ -174,7 +175,7 @@ public class SearchMusicPage extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!album.getText().equals("")) {
-					List<MusicModel> l = ParserMusic.parserArtistModel(SeachMusics.searchByAlbumName(artist.getText()));
+					List<MusicModel> l = ParserMusic.parserArtistModel(SearchMusics.searchByAlbumName(artist.getText()));
 					displayMusic(l);
 				} else {
 					JOptionPane.showMessageDialog(null, "Veuillez saisir l'album");
@@ -185,7 +186,7 @@ public class SearchMusicPage extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!track.getText().equals("")) {
-					List<MusicModel> l = ParserMusic.parserArtistModel(SeachMusics.searchByTrackName(artist.getText()));
+					List<MusicModel> l = ParserMusic.parserArtistModel(SearchMusics.searchByTrackName(artist.getText()));
 					displayMusic(l);
 				} else {
 					JOptionPane.showMessageDialog(null, "Veuillez saisir le track");
@@ -196,7 +197,7 @@ public class SearchMusicPage extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!label.getText().equals("")) {
-					List<MusicModel> l = ParserMusic.parserArtistModel(SeachMusics.searchByLabelName(artist.getText()));
+					List<MusicModel> l = ParserMusic.parserArtistModel(SearchMusics.searchByLabelName(artist.getText()));
 					displayMusic(l);
 				} else {
 					JOptionPane.showMessageDialog(null, "Veuillez saisir le label");
