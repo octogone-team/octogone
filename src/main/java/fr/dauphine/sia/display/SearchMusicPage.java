@@ -6,42 +6,23 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-
 import fr.dauphine.sia.SeachMusics;
-import fr.dauphine.sia.SearchMovies;
-import fr.dauphine.sia.Parser.MovieModel;
 import fr.dauphine.sia.Parser.MusicModel;
-import fr.dauphine.sia.Parser.ParserMovie;
 import fr.dauphine.sia.Parser.ParserMusic;
 
-public class SearchMusicPage extends JFrame {
+public class SearchMusicPage  extends JFrame {
 	private static final long serialVersionUID = 1L;
-
-	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	int screenWidth = (int)screenSize.getWidth();
-	int screenHeight = (int)screenSize.getHeight();
 
 	private JPanel panArtist = new JPanel();
 	private JPanel panAlbum = new JPanel();
@@ -50,61 +31,58 @@ public class SearchMusicPage extends JFrame {
 	private JPanel panresulat = new JPanel();
 	private JPanel pan = new JPanel();
 
-	private JLabel labelArtist = new JLabel("Artist Name : ");
-	private JFormattedTextField artist = new JFormattedTextField();
-	private JButton searchButton1 = new JButton ("OK");
+	 private JLabel labelArtist = new JLabel("Artist Name : ");
+	 private JFormattedTextField artist = new JFormattedTextField();
+	 private JButton searchButton1 = new JButton ("OK");
+	 private JLabel labelAlbum = new JLabel("Album : ");
+	 private JFormattedTextField album = new JFormattedTextField();
+	 private JButton searchButton2 = new JButton ("OK");
+	 private JLabel labelTrack = new JLabel("Track : ");
+	 private JFormattedTextField track = new JFormattedTextField();
+	 private JButton searchButton3 = new JButton ("OK");
+	 private JLabel labelLabel = new JLabel("Label : ");
+	 private JFormattedTextField label = new JFormattedTextField();
+	 private JButton searchButton4 = new JButton ("OK");
 
-	private JLabel labelAlbum = new JLabel("Album : ");
-	private JFormattedTextField album = new JFormattedTextField();
-	private JButton searchButton2 = new JButton ("OK");
+	 private JTextArea resultArea = new JTextArea();
 
-	private JLabel labelTrack = new JLabel("Track : ");
-	private JFormattedTextField track = new JFormattedTextField();
-	private JButton searchButton3 = new JButton ("OK");
+	 public SearchMusicPage() {
+		 this.setTitle("Search Musics Page");
+		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 panArtist.setBackground(Color.white);
+		 panArtist.setLayout(new GridBagLayout());
+		 panAlbum.setBackground(Color.white);
+		 panAlbum.setLayout(new GridBagLayout());
+		 panTrack.setBackground(Color.white);
+		 panTrack.setLayout(new GridBagLayout());
+		 panLabel.setBackground(Color.white);
+		 panLabel.setLayout(new GridBagLayout());
+		 panresulat.setBackground(Color.white);
+		 panresulat.setLayout(new GridBagLayout());
+		 pan.setLayout(new GridBagLayout());
+	 }
 
-	private JLabel labelLabel = new JLabel("Label : ");
-	private JFormattedTextField label = new JFormattedTextField();
-	private JButton searchButton4 = new JButton ("OK");
+	 private void Fenetre() {
 
-	private JTextPane resultArea = new JTextPane();
+		resultArea.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+		resultArea.setPreferredSize(new Dimension(1800, 600));
+		resultArea.setEditable(false);
 
-
-	public SearchMusicPage() {
-		this.setTitle("Search Movies Page");
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		panArtist.setBackground(Color.white);
-		panArtist.setLayout(new GridBagLayout());
-		panAlbum.setBackground(Color.white);
-		panAlbum.setLayout(new GridBagLayout());
-		panTrack.setBackground(Color.white);
-		panTrack.setLayout(new GridBagLayout());
-		panLabel.setBackground(Color.white);
-		panLabel.setLayout(new GridBagLayout());
-		panresulat.setBackground(Color.white);
-		panresulat.setLayout(new GridBagLayout());
-		pan.setLayout(new GridBagLayout());
-	}
-
-	public void Fenetre(){
 		artist.setFont(new Font("Arial", Font.BOLD, 14));
-		artist.setPreferredSize(new Dimension(screenWidth-300, 30));
+		artist.setPreferredSize(new Dimension(1600, 30));
 		artist.setForeground(Color.BLUE);
 
 		album.setFont(new Font("Arial", Font.BOLD, 14));
-		album.setPreferredSize(new Dimension(screenWidth-300, 30));
+		album.setPreferredSize(new Dimension(1630, 30));
 		album.setForeground(Color.BLUE);
 
 		track.setFont(new Font("Arial", Font.BOLD, 14));
-		track.setPreferredSize(new Dimension(screenWidth-300, 30));
+		track.setPreferredSize(new Dimension(1630, 30));
 		track.setForeground(Color.BLUE);
 
 		label.setFont(new Font("Arial", Font.BOLD, 14));
-		label.setPreferredSize(new Dimension(screenWidth-300, 30));
+		label.setPreferredSize(new Dimension(1630, 30));
 		label.setForeground(Color.BLUE);
-
-		resultArea.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-		resultArea.setPreferredSize(new Dimension(screenWidth-120, screenHeight-500));
-		resultArea.setEditable(false);
 
 		// Search Music by artist panel
 		GridBagConstraints constraintsPanArtist = new GridBagConstraints();
@@ -120,7 +98,7 @@ public class SearchMusicPage extends JFrame {
 		constraintsPanArtist.gridy = 0;
 		panArtist.add(searchButton1, constraintsPanArtist);
 		panArtist.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createEtchedBorder(), "Search Music By Artist"));
+						BorderFactory.createEtchedBorder(), "Search Music By Artist"));
 
 		// Search Music by album panel
 		GridBagConstraints constraintsPanAlbum = new GridBagConstraints();
@@ -136,7 +114,7 @@ public class SearchMusicPage extends JFrame {
 		constraintsPanAlbum.gridy = 0;
 		panAlbum.add(searchButton2, constraintsPanAlbum);
 		panAlbum.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createEtchedBorder(), "Search Music By Album"));
+						BorderFactory.createEtchedBorder(), "Search Music By Album"));
 
 		// Search Music by track panel
 		GridBagConstraints constraintsPanTrack = new GridBagConstraints();
@@ -152,7 +130,7 @@ public class SearchMusicPage extends JFrame {
 		constraintsPanTrack.gridy = 0;
 		panTrack.add(searchButton3, constraintsPanTrack);
 		panTrack.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createEtchedBorder(), "Search Music By Track"));
+						BorderFactory.createEtchedBorder(), "Search Music By Track"));
 
 		// Search Music by label panel
 		GridBagConstraints constraintsPanLabel = new GridBagConstraints();
@@ -168,7 +146,7 @@ public class SearchMusicPage extends JFrame {
 		constraintsPanLabel.gridy = 0;
 		panLabel.add(searchButton4, constraintsPanLabel);
 		panLabel.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createEtchedBorder(), "Search Music By Label"));
+						BorderFactory.createEtchedBorder(), "Search Music By Label"));
 
 		//Result Panel
 		GridBagConstraints constraintsPanResult = new GridBagConstraints();
@@ -177,19 +155,18 @@ public class SearchMusicPage extends JFrame {
 		constraintsPanResult.gridy = 0;
 		panresulat.add(resultArea, constraintsPanResult);
 		panresulat.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createEtchedBorder(), "Result"));
-		JScrollPane scroll = new JScrollPane(resultArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+						BorderFactory.createEtchedBorder(), "Result"));
 
 		searchButton1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(!artist.getText().equals("")) {
-					List<MusicModel> l = ParserMusic.parserArtistModel(SeachMusics.searchByArtistName(artist.getText()));
-					displayMusic(l);
-				} else {
-					JOptionPane.showMessageDialog(null, "Veuillez saisir le nom de l'artist");
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(!artist.getText().equals("")) {
+						List<MusicModel> l = ParserMusic.parserArtistModel(SeachMusics.searchByArtistName(artist.getText()));
+						displayMusic(l);
+					} else {
+						JOptionPane.showMessageDialog(null, "Veuillez saisir le nom de l'artist");
+					}
 				}
-			}
 		});
 		searchButton2.addActionListener(new ActionListener() {
 			@Override
@@ -226,31 +203,31 @@ public class SearchMusicPage extends JFrame {
 		});
 
 		// Page Panel
-		GridBagConstraints constraintsPan = new GridBagConstraints();
-		constraintsPan.anchor = GridBagConstraints.WEST;
-		constraintsPan.insets = new Insets(10, 10, 10, 10);
-		constraintsPan.gridx = 0;
-		constraintsPan.gridy = 0;
-		pan.add(panArtist, constraintsPan);
-		constraintsPan.gridx = 0;
-		constraintsPan.gridy = 1;
-		pan.add(panAlbum, constraintsPan);
-		constraintsPan.gridx = 0;
-		constraintsPan.gridy = 2;
-		pan.add(panTrack, constraintsPan);
-		constraintsPan.gridx = 0;
-		constraintsPan.gridy = 3;
-		pan.add(panLabel, constraintsPan);
-		constraintsPan.gridx = 0;
-		constraintsPan.gridy = 4;
-		pan.add(scroll, constraintsPan);
+ 		GridBagConstraints constraintsPan = new GridBagConstraints();
+ 		constraintsPan.anchor = GridBagConstraints.WEST;
+ 		constraintsPan.insets = new Insets(10, 10, 10, 10);
+ 		constraintsPan.gridx = 0;
+ 		constraintsPan.gridy = 0;
+ 		pan.add(panArtist, constraintsPan);
+ 		constraintsPan.gridx = 0;
+ 		constraintsPan.gridy = 1;
+ 		pan.add(panAlbum, constraintsPan);
+ 		constraintsPan.gridx = 0;
+ 		constraintsPan.gridy = 2;
+ 		pan.add(panTrack, constraintsPan);
+ 		constraintsPan.gridx = 0;
+ 		constraintsPan.gridy = 3;
+ 		pan.add(panLabel, constraintsPan);
+ 		constraintsPan.gridx = 0;
+ 		constraintsPan.gridy = 4;
+ 		pan.add(panresulat, constraintsPan);
 
-		this.add(pan);
-		this.pack();
-		this.setVisible(true);
-	}
+	    this.add(pan);
+	    this.pack();
+	    this.setVisible(true);
+	 }
 
-	private void displayMusic(List<MusicModel> l) {
+	 private void displayMusic(List<MusicModel> l) {
 		if(l!=null) {
 			System.out.println("Voici la musique: "+l.toString());
 			StringBuilder s = new StringBuilder();
@@ -262,11 +239,10 @@ public class SearchMusicPage extends JFrame {
 		} else {
 			JOptionPane.showMessageDialog(null, "Music introuvable");
 		}
-	}
+	 }
 
-	public static void main(String[] args) {
-		SearchMusicPage p = new SearchMusicPage();
-		p.Fenetre();
-	}
+	 public static void main(String[] args) {
+			SearchMusicPage p = new SearchMusicPage();
+			p.Fenetre();
+     }
 }
-
