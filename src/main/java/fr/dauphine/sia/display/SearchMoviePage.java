@@ -19,9 +19,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
-import fr.dauphine.sia.SearchMovies;
-import fr.dauphine.sia.Parser.MovieModel;
-import fr.dauphine.sia.Parser.ParserMovie;
+import fr.dauphine.sia.search.SearchMovies;
+import fr.dauphine.sia.parser.MovieModel;
+import fr.dauphine.sia.parser.ParserMovie;
 
 public class SearchMoviePage extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -197,7 +197,7 @@ public class SearchMoviePage extends JFrame {
 							s.append("<table>");
 								s.append("<tr>");
 									s.append("<td style=\"text-align:left\">");
-										s.append("<img src = \""+m.getPoster()+"\" style=\"width:150px;height:150px;\"/>");
+										s.append("<img src = \""+m.getAttribute("Poster")+"\" style=\"width:150px;height:150px;\"/>");
 									s.append("</td>");
 									
 									s.append("<td>");

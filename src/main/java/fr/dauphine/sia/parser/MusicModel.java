@@ -1,4 +1,4 @@
-package fr.dauphine.sia.Parser;
+package fr.dauphine.sia.parser;
 
 public class MusicModel {
 
@@ -173,5 +173,16 @@ public class MusicModel {
     	s.append("\n explicit_lyrics: "+explicit_lyrics+"\n explicit_content_lyrics  "+explicit_content_lyrics);
     	s.append("\n explicit_content_cover: "+explicit_content_cover+"\n  preview "+preview+"\n type "+type);
     	return s.toString();
+    }
+    
+    @Override
+    public boolean equals(Object object) {
+    	if(!(object instanceof MusicModel)) {
+    		return false;
+    	}
+    	
+    	MusicModel music= (MusicModel) object;
+    	
+    	return id==music.id;
     }
 }

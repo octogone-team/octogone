@@ -1,4 +1,4 @@
-package fr.dauphine.sia.Parser;
+package fr.dauphine.sia.parser;
 
 public class Rating {
 	

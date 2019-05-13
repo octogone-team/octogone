@@ -1,36 +1,37 @@
-package fr.dauphine.sia.Parser;
+package fr.dauphine.sia.parser;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
 
 public class MovieModel {
-	private static Logger LOGGER = Logger.getLogger(MovieModel.class);
-
+private static Logger LOGGER = Logger.getLogger(MovieModel.class);
+	
 	private HashMap<String, String> values;
 	private List<Rating> rates;
-
+	
 	public MovieModel() {
-		values = new HashMap<>();
+		values = new HashMap<String, String>();
 	}
-
+	
 	public void addRate(Rating rate) {
 		this.rates.add(rate);
 	}
-
+	
 	public List<Rating> getRates() {
 		return rates;
 	}
-
+	
 	public void setRates(List<Rating> rates) {
 		this.rates = rates;
 	}
-
+	
 	public String getAttribute(String attribute) {
 		return values.get(attribute);
 	}
-
+	
 	public void setAttribute(String attribute, String value) {
 		if(!ParserMovie.ATTRIBUTES_PROPERTIES.keySet().contains(attribute)) {
 			LOGGER.error("Attribute does not exist");
@@ -38,22 +39,22 @@ public class MovieModel {
 			values.put(attribute, value);
 		}
 	}
-
+	
 	public boolean notExist() {
 		return values.isEmpty();
 	}
-
+	
 	public HashMap<String, String> getValues(){
 		return values;
 	}
-
+    
 	@Override
 	public String toString() {
 		if(values.containsKey("Titre")) {
 			return "Titre: "+values.get("Titre");
 		}
 		return "";
-
+		
 //		String str="";
 //		for(Rating rate:rates) {
 //			str+=rate.toString();
@@ -65,9 +66,16 @@ public class MovieModel {
 //				+ ",\nimdbVotes=" + imdbVotes + ",\nimdbID=" + imdbID + ",\nType=" + Type + ",\nDVD=" + DVD + ",\nBoxOffice="
 //				+ BoxOffice + ",\nProduction=" + Production + ",\nWebsite=" + Website + ",\nResponse=" + Response + "]";
 	}
-
-	public String getPoster() {
-		return values.get("Poster");
+	
+	@Override
+	public boolean equals(Object object) {
+		if(!(object instanceof MovieModel)) {
+			return false;
+		}
+		
+		MovieModel movie=(MovieModel) object;
+		
+		
+		return values.equals(movie.values);
 	}
-
 }
