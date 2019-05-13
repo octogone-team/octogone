@@ -1,15 +1,13 @@
 package fr.dauphine.sia.display;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -23,9 +21,10 @@ import fr.dauphine.sia.search.SearchMovies;
 import fr.dauphine.sia.parser.MovieModel;
 import fr.dauphine.sia.parser.ParserMovie;
 
-public class SearchMoviePage extends JFrame {
+public class SearchMoviePage extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
+	private static String image = "movie_background.jpg";
+
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenWidth = (int)screenSize.getWidth();
     int screenHeight = (int)screenSize.getHeight();
@@ -33,8 +32,7 @@ public class SearchMoviePage extends JFrame {
 	 private JPanel panMovie = new JPanel();
 	 private JPanel panSerie = new JPanel();
 	 private JPanel panresulat = new JPanel();
-	 private JPanel pan = new JPanel();
-	 
+
 	 private JLabel labelMovie = new JLabel("Movie Title : ");
 	 private JFormattedTextField movieTitle = new JFormattedTextField();
 	 private JLabel labelYear = new JLabel("Year's release of movie : ");
@@ -46,18 +44,19 @@ public class SearchMoviePage extends JFrame {
 	 private JButton searchFilmButton = new JButton ("OK");
 	 
 	 private JTextPane resultArea = new JTextPane();
-	 
- 	 
-	 public SearchMoviePage() {
-		 this.setTitle("Search Movies Page");
-		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 panMovie.setBackground(Color.white);
-		 panMovie.setLayout(new GridBagLayout()); 
-		 panresulat.setBackground(Color.white);
+	private JFrame jFrame = new JFrame();
+
+
+	public SearchMoviePage() {
+		 jFrame.setTitle("Search Movies Page");
+		 jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 panMovie.setLayout(new GridBagLayout());
+		 panMovie.setOpaque(false);
 		 panresulat.setLayout(new GridBagLayout());
-		 panSerie.setBackground(Color.white);
+		 panresulat.setOpaque(false);
 		 panSerie.setLayout(new GridBagLayout());
-		 pan.setLayout(new GridBagLayout());
+		 panSerie.setOpaque(false);
+		 this.setLayout(new GridBagLayout());
 	 }
 
 	 public void Fenetre(){
@@ -75,8 +74,10 @@ public class SearchMoviePage extends JFrame {
 		episod.setForeground(Color.BLUE);
 		
 		resultArea.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-		resultArea.setPreferredSize(new Dimension(9*screenWidth/10, 2*screenHeight/3));
+		resultArea.setPreferredSize(new Dimension(9*screenWidth/10, 2*screenHeight/4));
+		resultArea.setOpaque(false);
 		resultArea.setEditable(false);
+
 	
 		// Search Movie Panel
 		GridBagConstraints constraintsPanMovie = new GridBagConstraints();
@@ -122,8 +123,10 @@ public class SearchMoviePage extends JFrame {
 		panresulat.add(resultArea, constraintsPanResult);
 		panresulat.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createEtchedBorder(), "Result"));
+		panresulat.setOpaque(false);
 		JScrollPane scroll = new JScrollPane(resultArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	    searchFilmButton.addActionListener(new ActionListener() {
+	    scroll.setOpaque(false);
+		searchFilmButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MovieModel movie = null;
@@ -193,6 +196,7 @@ public class SearchMoviePage extends JFrame {
 					}
 					if (!movies.isEmpty()){
 						s.append("<html>");
+						s.append("<body>");
 						for (MovieModel m : movies) {
 							s.append("<table>");
 								s.append("<tr>");
@@ -236,6 +240,7 @@ public class SearchMoviePage extends JFrame {
 							s.append("<br>");
 							s.append("<HR>");
 						}
+						s.append("</body>");
 						s.append("</html>");
 						resultArea.setContentType("text/html");
 						resultArea.setText(s.toString());
@@ -255,21 +260,34 @@ public class SearchMoviePage extends JFrame {
  		constraintsPan.insets = new Insets(10, 10, 10, 10);
  		constraintsPan.gridx = 0;
  		constraintsPan.gridy = 0;
- 		pan.add(panMovie, constraintsPan);
+ 		this.add(panMovie, constraintsPan);
  		constraintsPan.gridx = 0;
  		constraintsPan.gridy = 1;
- 		pan.add(panSerie, constraintsPan);
+ 		this.add(panSerie, constraintsPan);
  		constraintsPan.gridx = 0;
  		constraintsPan.gridy = 2;
- 		pan.add(scroll, constraintsPan);
+ 		this.add(scroll, constraintsPan);
 	 		
-	    this.add(pan);
-	    this.pack();
-	    this.setAlwaysOnTop(true);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-	    this.setVisible(true);
-	 }       
+	    jFrame.add(this);
+	    jFrame.pack();
+	    jFrame.setAlwaysOnTop(true);
+		jFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	    jFrame.setVisible(true);
+	 }
 
+	@Override
+	public void paintComponent(Graphics g) {
+		try (InputStream inputstream = WelcomePage.class.getResourceAsStream(image)) {
+			if (inputstream == null) {
+				System.out.println("File not found");
+				throw new FileNotFoundException("File not found");
+			}
+			Image image = ImageIO.read(inputstream);
+			g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	 public static void main(String[] args) {
 		SearchMoviePage p = new SearchMoviePage();
 		p.Fenetre();
