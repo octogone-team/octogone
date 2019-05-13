@@ -76,6 +76,35 @@ public class SearchMovies {
 		}
 		return getFilm(query);
 	}
+	
+	public static String getSeriesBySeasonByYear(String title, int season, int year) {
+		String query = null;
+		try {
+			query = String.format("apikey=%s&t=%s&season=%s&y=%s", 
+						URLEncoder.encode(key, charset),
+						URLEncoder.encode(title, charset), 
+						URLEncoder.encode(Integer.toString(season), charset),
+						URLEncoder.encode(Integer.toString(year), charset));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return getFilm(query);
+	}
+	
+	public static String getSeriesByEpisodeByYear(String title, int season, int episode, int year) {
+		String query = null;
+		try {
+			query = String.format("apikey=%s&t=%s&season=%s&episode=%s&y=%s", 
+						URLEncoder.encode(key, charset),
+						URLEncoder.encode(title, charset), 
+						URLEncoder.encode(Integer.toString(season), charset), 
+						URLEncoder.encode(Integer.toString(episode), charset),
+						URLEncoder.encode(Integer.toString(year), charset));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return getFilm(query);
+	}
 
 	private static String getFilm (String query) {
         try {
