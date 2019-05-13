@@ -17,9 +17,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import fr.dauphine.sia.SearchMovies;
-import fr.dauphine.sia.Parser.MovieModel;
-import fr.dauphine.sia.Parser.ParserMovie;
+import fr.dauphine.sia.search.SearchMovies;
+import fr.dauphine.sia.parser.MovieModel;
+import fr.dauphine.sia.parser.ParserMovie;
 
 public class SearchMoviePage extends JFrame {
 	private static final long serialVersionUID = 1L;

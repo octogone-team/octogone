@@ -1,4 +1,4 @@
-package fr.dauphine.sia;
+package fr.dauphine.sia.app;
 
 /**
  * Hello world!
