@@ -21,26 +21,37 @@ public class WelcomePage extends JPanel  {
         JLabel title = new JLabel("Welcome To Octogone Server");
 		title.setBounds(0, 0, screenWidth, 500);
 		title.setHorizontalAlignment(SwingConstants.CENTER);
-		Font font = new Font("Times", Font.BOLD, 100);
+		Font font = new Font("Times", Font.BOLD, 90);
 		title.setFont(font);
 		title.setForeground(Color.WHITE);
-
 		JButton movieSearchButton = new JButton("Movie research");// creating instance of JButton
-		movieSearchButton.setBounds((screenWidth / 2) +90 , screenHeight/3, 200, 40);// x axis, y
-		movieSearchButton.setVerticalAlignment(SwingConstants.CENTER);
+		JButton musicSearchButton =new JButton("Music research");//creating instance of JButton
+		try {
+		    Image img_film = ImageIO.read(this.getClass().getResource("icon_film.png"));
+		    Image new_img_film = img_film.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+		    movieSearchButton.setIcon(new ImageIcon(new_img_film));
+		    Image img_music = ImageIO.read(this.getClass().getResource("icon_music.png"));
+		    Image new_img_music = img_music.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+		    musicSearchButton.setIcon(new ImageIcon(new_img_music));
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		movieSearchButton.setBounds(4*screenHeight/5, screenHeight/2, screenHeight/2, 80);
+		movieSearchButton.setHorizontalAlignment(SwingConstants.CENTER);
 		movieSearchButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 5));
 		movieSearchButton.setForeground(Color.BLACK);
-		movieSearchButton.setBackground(Color.WHITE);
+		movieSearchButton.setFont(new Font("Arial", Font.BOLD, 28));
+		movieSearchButton.setOpaque(true);
 		movieSearchButton.addActionListener(e -> SearchMoviePage.main(null));
-
-		JButton musicSearchButton =new JButton("Music research");//creating instance of JButton
-		musicSearchButton.setBounds((screenWidth/2)-350,screenHeight/3 ,200, 40);//x axis, y axis, width, height
-		musicSearchButton.setVerticalAlignment(SwingConstants.CENTER);
+		
+		musicSearchButton.setBounds(screenHeight/5,screenHeight/2 ,screenHeight/2, 80);//x axis, y axis, width, height
+		musicSearchButton.setHorizontalAlignment(SwingConstants.CENTER);
 		musicSearchButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 5));
 		musicSearchButton.setForeground(Color.BLACK);
-		musicSearchButton.setBackground(Color.WHITE);
+		musicSearchButton.setFont(new Font("Arial", Font.BOLD, 28));
+		musicSearchButton.setOpaque(true);
         musicSearchButton.addActionListener(e -> SearchMusicPage.main(null));
-
+		
 		this.add(movieSearchButton);
 		this.add(musicSearchButton);
 		this.add(title);
