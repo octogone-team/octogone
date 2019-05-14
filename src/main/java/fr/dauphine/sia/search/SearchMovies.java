@@ -53,7 +53,7 @@ public class SearchMovies {
 	public static String getSeriesBySeason(String title, int season) {
 		String query = null;
 		try {
-			query = String.format("apikey=%s&t=%s&season=%s", 
+			query = String.format("apikey=%s&s=%s&season=%s",
 						URLEncoder.encode(key, charset),
 						URLEncoder.encode(title, charset), 
 						URLEncoder.encode(Integer.toString(season), charset));
