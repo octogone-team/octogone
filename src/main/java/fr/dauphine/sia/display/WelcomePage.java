@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class WelcomePage extends JPanel  {
-	private static String image = "octogoneServer.jpg";
+	private static String image = "bg.jpg";
 
     WelcomePage() {
 
@@ -19,9 +19,9 @@ public class WelcomePage extends JPanel  {
         int screenHeight = (int)screenSize.getHeight();
 
         JLabel title = new JLabel("Welcome To Octogone Server");
-		title.setBounds(screenWidth/2-400, 90, 700, 100);
+		title.setBounds(0, 0, screenWidth, 500);
 		title.setHorizontalAlignment(SwingConstants.CENTER);
-		Font font = new Font("Times", Font.BOLD, 40);
+		Font font = new Font("Times", Font.BOLD, 100);
 		title.setFont(font);
 		title.setForeground(Color.WHITE);
 
@@ -50,9 +50,11 @@ public class WelcomePage extends JPanel  {
         frame.getContentPane().add(movieSearchButton);
         frame.getContentPane().add(musicSearchButton);
         frame.getContentPane().add(title);
-		frame.setSize(1280, 720);
+		//frame.setSize(1280, 720);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(this);
+        frame.setAlwaysOnTop(true);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
 
     }
