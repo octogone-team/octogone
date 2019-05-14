@@ -23,7 +23,7 @@ import fr.dauphine.sia.parser.ParserMovie;
 
 public class SearchMoviePage extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private static String image = "movie_background.jpg";
+	private static String image = "sparks.jpg";
 
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenWidth = (int)screenSize.getWidth();
