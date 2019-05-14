@@ -23,7 +23,7 @@ import fr.dauphine.sia.parser.ParserMovie;
 
 public class SearchMoviePage extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private static String image = "sparks.jpg";
+	private static String image = "welcome_page.jpg";
 
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenWidth = (int)screenSize.getWidth();
@@ -44,12 +44,12 @@ public class SearchMoviePage extends JPanel {
 	 private JButton searchFilmButton = new JButton ("OK");
 	 
 	 private JTextPane resultArea = new JTextPane();
-	private JFrame jFrame = new JFrame();
+	 private JFrame jFrame = new JFrame();
 
 
 	public SearchMoviePage() {
 		 jFrame.setTitle("Search Movies Page");
-		 jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		 panMovie.setLayout(new GridBagLayout());
 		 panMovie.setOpaque(false);
 		 panresulat.setLayout(new GridBagLayout());
@@ -60,21 +60,34 @@ public class SearchMoviePage extends JPanel {
 	 }
 
 	 public void Fenetre(){
+		//labelMovie.setForeground(Color.white);
+		labelMovie.setFont(new Font("Arial", Font.BOLD, 14));
+		//labelYear.setForeground(Color.white);
+		labelYear.setFont(new Font("Arial", Font.BOLD, 14));
+		//labelSeason.setForeground(Color.white);
+		labelSeason.setFont(new Font("Arial", Font.BOLD, 14));
+		//labelEpisod.setForeground(Color.white);
+		labelEpisod.setFont(new Font("Arial", Font.BOLD, 14));
 	    movieTitle.setFont(new Font("Arial", Font.BOLD, 14));
-		movieTitle.setPreferredSize(new Dimension(2*screenWidth/10, 30));
+	    
+		movieTitle.setPreferredSize(new Dimension(2*screenWidth/11, 30));
 		movieTitle.setForeground(Color.BLUE);
+		movieTitle.setOpaque(true);
+		
 		year.setFont(new Font("Arial", Font.BOLD, 14));
-		year.setPreferredSize(new Dimension(2*screenWidth/11, 30));
+		year.setPreferredSize(new Dimension(screenWidth/11, 30));
 		year.setForeground(Color.BLUE);
+		
 		season.setFont(new Font("Arial", Font.BOLD, 14));
-		season.setPreferredSize(new Dimension(1*screenWidth/9, 30));
+		season.setPreferredSize(new Dimension(1*screenWidth/11, 30));
 		season.setForeground(Color.BLUE);
+		
 		episod.setFont(new Font("Arial", Font.BOLD, 14));
-		episod.setPreferredSize(new Dimension(1*screenWidth/9, 30));
+		episod.setPreferredSize(new Dimension(1*screenWidth/11, 30));
 		episod.setForeground(Color.BLUE);
 		
 		resultArea.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-		resultArea.setPreferredSize(new Dimension(9*screenWidth/10, 2*screenHeight/4));
+		resultArea.setPreferredSize(new Dimension(20*screenWidth/21, 3*screenHeight/5));
 		resultArea.setOpaque(false);
 		resultArea.setEditable(false);
 
@@ -205,34 +218,35 @@ public class SearchMoviePage extends JPanel {
 									s.append("</td>");
 									
 									s.append("<td>");
-										s.append("<p align=\"center\" style=\"font-size:50px; font-weight:bold;\">"+m.getAttribute("Title"));
-										s.append("<span style=\"font-size:15px;\"> - "+m.getAttribute("Runtime")+"</span>");
+										s.append("<p align=\"center\" style=\"font-size:40px; font-weight:bold;\">"+m.getAttribute("Title"));
+										s.append("<span style=\"font-size:13px;\"> - "+m.getAttribute("Runtime")+"</span>");
 										s.append("<br>");
-										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+m.getAttribute("Plot")+"</span>");
+										s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic;\">"+m.getAttribute("Plot")+"</span>");
+										s.append("</p>");
+										s.append("<br>");
+										s.append("<p>");
+										s.append("<span align=\"center\" style=\"font-size:14px; font-style:italic; color:blue;\">Date de sortie : </span>");
+										s.append("<span align=\"center\" style=\"font-size:16px; font-style:italic;\">"+m.getAttribute("Released")+"</span>");
 										s.append("</p>");
 										s.append("<p>");
-										s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic; color:blue;\">Date de sortie : </span>");
-										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+m.getAttribute("Released")+"</span>");
+										s.append("<span align=\"center\" style=\"font-size:14px; font-style:italic; color:blue;\">Genre : </span>");
+										s.append("<span align=\"center\" style=\"font-size:16px; font-style:italic;\">"+m.getAttribute("Genre")+"</span>");
 										s.append("</p>");
 										s.append("<p>");
-										s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic; color:blue;\">Genre : </span>");
-										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+m.getAttribute("Genre")+"</span>");
+										s.append("<span align=\"center\" style=\"font-size:14px; font-style:italic; color:blue;\">Langue : </span>");
+										s.append("<span align=\"center\" style=\"font-size:16px; font-style:italic;\">"+m.getAttribute("Language")+"</span>");
 										s.append("</p>");
 										s.append("<p>");
-										s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic; color:blue;\">Langue : </span>");
-										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+m.getAttribute("Language")+"</span>");
+										s.append("<span align=\"center\" style=\"font-size:14px; font-style:italic; color:blue;\">Producteur : </span>");
+										s.append("<span align=\"center\" style=\"font-size:16px; font-style:italic;\">"+m.getAttribute("Director")+"</span>");
 										s.append("</p>");
 										s.append("<p>");
-										s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic; color:blue;\">Producteur : </span>");
-										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+m.getAttribute("Director")+"</span>");
+										s.append("<span align=\"center\" style=\"font-size:14px; font-style:italic; color:blue;\">Scénariste : </span>");
+										s.append("<span align=\"center\" style=\"font-size:16px; font-style:italic;\">"+m.getAttribute("Writer")+"</span>");
 										s.append("</p>");
 										s.append("<p>");
-										s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic; color:blue;\">Scénariste : </span>");
-										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+m.getAttribute("Writer")+"</span>");
-										s.append("</p>");
-										s.append("<p>");
-										s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic; color:blue;\">Acteur : </span>");
-										s.append("<span align=\"center\" style=\"font-size:20px; font-style:italic;\">"+m.getAttribute("Actors")+"</span>");
+										s.append("<span align=\"center\" style=\"font-size:14px; font-style:italic; color:blue;\">Acteur : </span>");
+										s.append("<span align=\"center\" style=\"font-size:16px; font-style:italic;\">"+m.getAttribute("Actors")+"</span>");
 										s.append("</p>");
 									s.append("</td>");
 								s.append("</tr>");
