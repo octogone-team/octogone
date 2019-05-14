@@ -78,7 +78,7 @@ public class SearchMoviePage extends JPanel {
 		resultArea.setOpaque(false);
 		resultArea.setEditable(false);
 
-	
+
 		// Search Movie Panel
 		GridBagConstraints constraintsPanMovie = new GridBagConstraints();
 		constraintsPanMovie.anchor = GridBagConstraints.WEST;
