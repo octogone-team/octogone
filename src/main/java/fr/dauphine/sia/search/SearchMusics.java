@@ -20,9 +20,6 @@ public class SearchMusics {
 		HttpURLConnection conn;
 		name = name.replaceAll(" ", "+");
 		try {
-			System.out.println("URL:"+API.get("url"));
-			System.out.println("TAG:"+TAG);
-			System.out.println("name:"+name);
 			conn = (HttpURLConnection) new URL(API.get("url")+TAG+name+"\"").openConnection();
 			conn.connect();
 			InputStream response = conn.getInputStream();
