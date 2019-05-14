@@ -12,7 +12,7 @@ import javax.swing.*;
 public class WelcomePage extends JPanel  {
 	private static String image = "bg.jpg";
 
-    WelcomePage() {
+    public WelcomePage() {
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int)screenSize.getWidth();
@@ -83,11 +83,5 @@ public class WelcomePage extends JPanel  {
 			e.printStackTrace();
 		}
 	}
-
-    public static void main(String[] args)
-    {
-        WelcomePage welcomePage= new WelcomePage();
-    }
-
 
 }

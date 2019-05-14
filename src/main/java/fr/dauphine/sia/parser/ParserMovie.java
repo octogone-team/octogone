@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import fr.dauphine.sia.properties.PropertiesLoader;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,22 +34,6 @@ public class ParserMovie {
 					LOGGER.info(attr+" not in JSON");
 				}
 			}
-			
-			// A changer peut-être pour parser les Ratings
-			if(jsonObject.has("Rating")) {
-				JSONArray jsonArray = jsonObject.getJSONArray("Ratings");
-				if(jsonArray!=null) {
-					for(int i=0; i<jsonArray.length(); i++) {
-						String source = jsonArray.getJSONObject(i).getString("Source");
-						String value = jsonArray.getJSONObject(i).getString("Value");
-						Rating rating = new Rating(source, value);
-						movie.addRate(rating);
-					}
-				}
-			}
-			
-			
-			
 		} else {
 			LOGGER.error("Error in title: not valid");
 		}
@@ -58,7 +43,7 @@ public class ParserMovie {
 	
 	public static List<MovieModel> parserFilesJSON(String jsonStr) {
 		List<MovieModel> elements=null;
-		
+
 		if(jsonStr!=null && jsonStr.contains("Response")) {
 			JSONObject jo =new JSONObject(jsonStr);
 			boolean response= jo.getBoolean("Response");

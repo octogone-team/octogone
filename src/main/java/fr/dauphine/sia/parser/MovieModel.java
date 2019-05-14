@@ -1,31 +1,23 @@
 package fr.dauphine.sia.parser;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 public class MovieModel {
-private static Logger LOGGER = Logger.getLogger(MovieModel.class);
+
+	public enum TYPE{
+		MOVIE,SERIE
+	};
+
+	private static Logger LOGGER = Logger.getLogger(MovieModel.class);
 	
 	private HashMap<String, String> values;
-	private List<Rating> rates;
+	private TYPE type;
 	
 	public MovieModel() {
-		values = new HashMap<String, String>();
-	}
-	
-	public void addRate(Rating rate) {
-		this.rates.add(rate);
-	}
-	
-	public List<Rating> getRates() {
-		return rates;
-	}
-	
-	public void setRates(List<Rating> rates) {
-		this.rates = rates;
+		values = new HashMap<>();
 	}
 	
 	public String getAttribute(String attribute) {
@@ -54,17 +46,6 @@ private static Logger LOGGER = Logger.getLogger(MovieModel.class);
 			return "Titre: "+values.get("Titre");
 		}
 		return "";
-		
-//		String str="";
-//		for(Rating rate:rates) {
-//			str+=rate.toString();
-//		}
-//		return "Film [\nTitle=" + Title + ",\nYear=" + Year + ",\nRated=" + Rated + ",\nReleased=" + Released + ",\nRuntime="
-//				+ Runtime + ",\nGenre=" + Genre + ",\nDirector=" + Director + ",\nWriter=" + Writer + ",\nActors=" + Actors
-//				+ ",\nPlot=" + Plot + ",\nLanguage=" + Language + ",\nCountry=" + Country + ",\nAwards=" + Awards
-//				+ ",\nPoster=" + Poster + ",\nrates=" + str + ",\nMetascore=" + Metascore + ",\nimdbRating=" + imdbRating
-//				+ ",\nimdbVotes=" + imdbVotes + ",\nimdbID=" + imdbID + ",\nType=" + Type + ",\nDVD=" + DVD + ",\nBoxOffice="
-//				+ BoxOffice + ",\nProduction=" + Production + ",\nWebsite=" + Website + ",\nResponse=" + Response + "]";
 	}
 	
 	@Override

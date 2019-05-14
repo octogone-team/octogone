@@ -2,15 +2,15 @@ package fr.dauphine.sia.parser;
 
 public class Album {
 
-	int  id;
-    String title;
-    String cover;
-    String cover_small;
-    String cover_medium;
-    String cover_big;
-    String cover_xl;
-    String tracklist;
-    String type;
+	private int  id;
+    private String title;
+    private String cover;
+    private String cover_small;
+    private String cover_medium;
+    private String cover_big;
+    private String cover_xl;
+    private String tracklist;
+    private String type;
     
     public Album(int id, String title,
     		String cover, String cover_small, String cover_medium,
