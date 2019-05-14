@@ -33,7 +33,7 @@ import fr.dauphine.sia.search.SearchMusics;
 
 
 public class SearchMusicPage extends JPanel {
-	private static String image = "music_search.jpg";
+	private static String image = "sparks.jpg";
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panArtist = new JPanel();
