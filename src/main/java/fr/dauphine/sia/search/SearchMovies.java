@@ -25,25 +25,25 @@ public class SearchMovies {
 		return getFilm(query);
 	}
 	
-	public static String getSpecificMoviesOrSeriesByTitle(String title) {
+	public static String getMoviesByYears(String title, int year) {
 		String query = null;
 		try {
-			query = String.format("apikey=%s&t=%s", 
+			query = String.format("apikey=%s&s=%s&y=%s", 
 						URLEncoder.encode(key, charset),
-						URLEncoder.encode(title, charset));
+						URLEncoder.encode(title, charset),
+						URLEncoder.encode(Integer.toString(year), charset));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		return getFilm(query);
 	}
 	
-	public static String getMoviesByYear(String title, int year) {
+	public static String getSpecificMoviesOrSeriesByTitle(String title) {
 		String query = null;
 		try {
-			query = String.format("apikey=%s&s=%s&y=%s", 
+			query = String.format("apikey=%s&t=%s", 
 						URLEncoder.encode(key, charset),
-						URLEncoder.encode(title, charset), 
-						URLEncoder.encode(Integer.toString(year), charset));
+						URLEncoder.encode(title, charset));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -63,7 +63,20 @@ public class SearchMovies {
 		return getFilm(query);
 	}
 	
-	public static String getSeriesByEpisode(String title, int season, int episode) {
+	public static String getSpecificSeriesBySeason(String title, int season) {
+		String query = null;
+		try {
+			query = String.format("apikey=%s&t=%s&season=%s", 
+						URLEncoder.encode(key, charset),
+						URLEncoder.encode(title, charset), 
+						URLEncoder.encode(Integer.toString(season), charset));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return getFilm(query);
+	}
+	
+	public static String getSpecificSeriesByEpisode(String title, int season, int episode) {
 		String query = null;
 		try {
 			query = String.format("apikey=%s&t=%s&season=%s&episode=%s", 
@@ -71,35 +84,6 @@ public class SearchMovies {
 						URLEncoder.encode(title, charset), 
 						URLEncoder.encode(Integer.toString(season), charset), 
 						URLEncoder.encode(Integer.toString(episode), charset));
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		return getFilm(query);
-	}
-	
-	public static String getSeriesBySeasonByYear(String title, int season, int year) {
-		String query = null;
-		try {
-			query = String.format("apikey=%s&t=%s&season=%s&y=%s", 
-						URLEncoder.encode(key, charset),
-						URLEncoder.encode(title, charset), 
-						URLEncoder.encode(Integer.toString(season), charset),
-						URLEncoder.encode(Integer.toString(year), charset));
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		return getFilm(query);
-	}
-	
-	public static String getSeriesByEpisodeByYear(String title, int season, int episode, int year) {
-		String query = null;
-		try {
-			query = String.format("apikey=%s&t=%s&season=%s&episode=%s&y=%s", 
-						URLEncoder.encode(key, charset),
-						URLEncoder.encode(title, charset), 
-						URLEncoder.encode(Integer.toString(season), charset), 
-						URLEncoder.encode(Integer.toString(episode), charset),
-						URLEncoder.encode(Integer.toString(year), charset));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

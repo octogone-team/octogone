@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -60,13 +61,9 @@ public class SearchMoviePage extends JPanel {
 	 }
 
 	 public void Fenetre(){
-		//labelMovie.setForeground(Color.white);
 		labelMovie.setFont(new Font("Arial", Font.BOLD, 14));
-		//labelYear.setForeground(Color.white);
 		labelYear.setFont(new Font("Arial", Font.BOLD, 14));
-		//labelSeason.setForeground(Color.white);
 		labelSeason.setFont(new Font("Arial", Font.BOLD, 14));
-		//labelEpisod.setForeground(Color.white);
 		labelEpisod.setFont(new Font("Arial", Font.BOLD, 14));
 	    movieTitle.setFont(new Font("Arial", Font.BOLD, 14));
 	    
@@ -183,18 +180,22 @@ public class SearchMoviePage extends JPanel {
 						}
 					} 
 					else if (y!=-1&&seas==-1&&ep==-1) {
-						movies=ParserMovie.parserFilesJSON(SearchMovies.getMoviesByYear(t, y));
+						System.out.println("année");
+						movies=ParserMovie.parserFilesJSON(SearchMovies.getMoviesByYears(t, y));
 					}
 					else if(seas!=-1) {
 						if(ep!=-1) {
 							if(y!=-1) {
-								movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesByEpisodeByYear(t, seas, ep, y));
+								//movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesBySeason(t, seas));
+								//TODO filtrer par season, ep , y
 							}else {
-								movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesByEpisode(t, seas, ep));
+								//movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesBySeason(t, seas));
+								//TODO filtrer par season, ep
 							}
 						} else {
 							if(y!=-1) {
-								movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesBySeasonByYear(t, seas, y));
+								//movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesBySeason(t, seas));
+								//TODO filtrer par season, y
 							}else {
 								movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesBySeason(t, seas));
 							}
