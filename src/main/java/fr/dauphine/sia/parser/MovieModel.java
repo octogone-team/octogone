@@ -32,6 +32,10 @@ public class MovieModel {
 		}
 	}
 	
+	public void setType(TYPE t) {
+		this.type = t;
+	}
+	
 	public boolean notExist() {
 		return values.isEmpty();
 	}
@@ -53,10 +57,7 @@ public class MovieModel {
 		if(!(object instanceof MovieModel)) {
 			return false;
 		}
-		
 		MovieModel movie=(MovieModel) object;
-		
-		
 		return values.equals(movie.values);
 	}
 }

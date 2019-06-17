@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -39,8 +40,6 @@ public class SearchMoviePage extends JPanel {
 	 private JFormattedTextField year = new JFormattedTextField();
 	 private JLabel labelSeason = new JLabel("Season (if serie) : ");
 	 private JFormattedTextField season = new JFormattedTextField();
-	 private JLabel labelEpisod = new JLabel("Episod (if serie) : ");
-	 private JFormattedTextField episod = new JFormattedTextField();
 	 private JButton searchFilmButton = new JButton ("OK");
 	 
 	 private JTextPane resultArea = new JTextPane();
@@ -60,14 +59,9 @@ public class SearchMoviePage extends JPanel {
 	 }
 
 	 public void Fenetre(){
-		//labelMovie.setForeground(Color.white);
 		labelMovie.setFont(new Font("Arial", Font.BOLD, 14));
-		//labelYear.setForeground(Color.white);
 		labelYear.setFont(new Font("Arial", Font.BOLD, 14));
-		//labelSeason.setForeground(Color.white);
 		labelSeason.setFont(new Font("Arial", Font.BOLD, 14));
-		//labelEpisod.setForeground(Color.white);
-		labelEpisod.setFont(new Font("Arial", Font.BOLD, 14));
 	    movieTitle.setFont(new Font("Arial", Font.BOLD, 14));
 	    
 		movieTitle.setPreferredSize(new Dimension(2*screenWidth/11, 30));
@@ -81,10 +75,7 @@ public class SearchMoviePage extends JPanel {
 		season.setFont(new Font("Arial", Font.BOLD, 14));
 		season.setPreferredSize(new Dimension(1*screenWidth/11, 30));
 		season.setForeground(Color.BLUE);
-		
-		episod.setFont(new Font("Arial", Font.BOLD, 14));
-		episod.setPreferredSize(new Dimension(1*screenWidth/11, 30));
-		episod.setForeground(Color.BLUE);
+	
 		
 		resultArea.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 14));
 		resultArea.setPreferredSize(new Dimension(20*screenWidth/21, 3*screenHeight/5));
@@ -116,12 +107,7 @@ public class SearchMoviePage extends JPanel {
 		panMovie.add(season, constraintsPanMovie);
 		constraintsPanMovie.gridx = 6;
 		constraintsPanMovie.gridy = 0;
-		panMovie.add(labelEpisod, constraintsPanMovie);
-		constraintsPanMovie.gridx = 7;
-		constraintsPanMovie.gridy = 0;
-		panMovie.add(episod, constraintsPanMovie);
-	    constraintsPanMovie.gridx = 0;
-		constraintsPanMovie.gridy = 2;
+	
 		constraintsPanMovie.gridwidth = 10;
 		constraintsPanMovie.anchor = GridBagConstraints.CENTER;
 		panMovie.add(searchFilmButton, constraintsPanMovie);
@@ -145,7 +131,6 @@ public class SearchMoviePage extends JPanel {
 				MovieModel movie = null;
 				List<MovieModel> movies = new ArrayList<>();
 				int y = -1;
-				int ep = -1;
 				int seas = -1;
 				if (!movieTitle.getText().equals("")) {
 					String t = movieTitle.getText();
@@ -156,13 +141,7 @@ public class SearchMoviePage extends JPanel {
 							JOptionPane.showMessageDialog(null, "Attention! L'année est incorrect");
 						}
 					}
-					else if(!episod.getText().equals("")) {
-						try {
-							ep = Integer.parseInt(episod.getText());
-						} catch (NumberFormatException e1) {
-							JOptionPane.showMessageDialog(null, "Attention! L'épisode est incorrect");
-						}
-					}
+					
 					else if(!season.getText().equals("")) {
 						try {
 							seas = Integer.parseInt(season.getText());
@@ -170,35 +149,23 @@ public class SearchMoviePage extends JPanel {
 							JOptionPane.showMessageDialog(null, "Attention! La saison est incorrect");
 						}
 					}
-					if(seas==-1&&ep!=-1) {
-						JOptionPane.showMessageDialog(null, "Attention! Quelle saison vous intéresse?");
-					}
 					
 					//SEARCH
-					if(y==-1&&seas==-1&&ep==-1) {
+					if(y==-1&&seas==-1) {
 						if(SearchMovies.getMoviesByTitle(t).contains("Error")){
 							movie=ParserMovie.parserFileJSON(SearchMovies.getSpecificMoviesOrSeriesByTitle(t));
 						} else {
 							movies = ParserMovie.parserFilesJSON(SearchMovies.getMoviesByTitle(t));
 						}
 					} 
-					else if (y!=-1&&seas==-1&&ep==-1) {
-						movies=ParserMovie.parserFilesJSON(SearchMovies.getMoviesByYear(t, y));
+					else if (y!=-1&&seas==-1) {
+						System.out.println("année");
+						movies=ParserMovie.parserFilesJSON(SearchMovies.getMoviesByYears(t, y));
 					}
 					else if(seas!=-1) {
-						if(ep!=-1) {
-							if(y!=-1) {
-								movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesByEpisodeByYear(t, seas, ep, y));
-							}else {
-								movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesByEpisode(t, seas, ep));
-							}
-						} else {
-							if(y!=-1) {
-								movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesBySeasonByYear(t, seas, y));
-							}else {
-								movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesBySeason(t, seas));
-							}
-						}
+						movies = ParserMovie.parserFilesJSON(SearchMovies.getSeriesBySeason(t, seas));
+					
+						
 					}
 					
 					//Display Movies
@@ -218,12 +185,32 @@ public class SearchMoviePage extends JPanel {
 									s.append("</td>");
 									
 									s.append("<td>");
-										s.append("<p align=\"center\" style=\"font-size:40px; font-weight:bold;\">"+m.getAttribute("Title"));
-										s.append("<span style=\"font-size:13px;\"> - "+m.getAttribute("Runtime")+"</span>");
-										s.append("<br>");
-										s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic;\">"+m.getAttribute("Plot")+"</span>");
-										s.append("</p>");
-										s.append("<br>");
+										if (m.getAttribute("Type").equals("episode") ){
+											s.append("<p align=\"center\" style=\"font-size:40px; font-weight:bold;\">"+m.getAttribute("Title") + " - Serie: " + m.getAttribute("SerieTitle"));
+											s.append("<span style=\"font-size:13px;\"> - "+m.getAttribute("Runtime")+"</span>");
+											s.append("<br>");
+											s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic;\">"+m.getAttribute("Plot")+"</span>");
+											s.append("</p>");
+											s.append("<br>");
+											s.append("<p>");
+											s.append("<span align=\"center\" style=\"font-size:14px; font-style:italic; color:blue;\">Saison : </span>");
+											s.append("<span align=\"center\" style=\"font-size:16px; font-style:italic;\">"+m.getAttribute("Season")+"</span>");
+											s.append("</p>");
+											s.append("<p>");
+											s.append("<span align=\"center\" style=\"font-size:14px; font-style:italic; color:blue;\">Episode : </span>");
+											s.append("<span align=\"center\" style=\"font-size:16px; font-style:italic;\">"+m.getAttribute("Episode")+"</span>");
+											s.append("</p>");
+											
+										}
+										else {
+											s.append("<p align=\"center\" style=\"font-size:40px; font-weight:bold;\">"+m.getAttribute("Title"));
+											s.append("<span style=\"font-size:13px;\"> - "+m.getAttribute("Runtime")+"</span>");
+											s.append("<br>");
+											s.append("<span align=\"center\" style=\"font-size:18px; font-style:italic;\">"+m.getAttribute("Plot")+"</span>");
+											s.append("</p>");
+											s.append("<br>");
+										}
+										
 										s.append("<p>");
 										s.append("<span align=\"center\" style=\"font-size:14px; font-style:italic; color:blue;\">Date de sortie : </span>");
 										s.append("<span align=\"center\" style=\"font-size:16px; font-style:italic;\">"+m.getAttribute("Released")+"</span>");
