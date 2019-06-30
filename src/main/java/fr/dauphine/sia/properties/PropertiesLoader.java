@@ -3,7 +3,6 @@ package fr.dauphine.sia.properties;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import static fr.dauphine.sia.constants.LoggerConstants.*;
 
 import org.apache.log4j.Logger;
 
@@ -15,12 +14,12 @@ public class PropertiesLoader {
         try (InputStream input = PropertiesLoader.class.getClassLoader().getResourceAsStream(propertiesFilename)) {
 
             if (input == null) {
-            	LOGGER.error(LOADING_PROPERTIES_FAIL + propertiesFilename);
+            	LOGGER.error("Cannot load Properties File: " + propertiesFilename);
             	return properties;
             }
 
             properties.load(input);
-            LOGGER.info(LOADING_PROPERTIES_SUCCESS + propertiesFilename);
+            LOGGER.info("Successfully loaded Properties File: " + propertiesFilename);
 
         } catch (IOException e) {
             e.printStackTrace();

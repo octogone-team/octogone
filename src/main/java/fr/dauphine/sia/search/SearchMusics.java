@@ -10,11 +10,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
-import static fr.dauphine.sia.constants.SearchConstants.*;
-
 public class SearchMusics {
-	private static Properties API = PropertiesLoader.get(MUSIC_API_PROPERTIES);
-	private static Properties TAGS = PropertiesLoader.get(MUSIC_TAGS_PROPERTIES);
+	private static Properties API = PropertiesLoader.get("MusicAPIConfig.properties");
+	private static Properties TAGS = PropertiesLoader.get("MusicTAGS.properties");
     
 	private static String search(String name, String TAG) {
 		HttpURLConnection conn;

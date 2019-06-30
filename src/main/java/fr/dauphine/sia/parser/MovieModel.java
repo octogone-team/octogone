@@ -1,7 +1,6 @@
 package fr.dauphine.sia.parser;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 
