@@ -57,7 +57,7 @@ public class ParserMovie {
 					String title=array.getJSONObject(i).getString("Title");
 					MovieModel movie=parserFileJSON(SearchMovies.getSpecificMoviesOrSeriesByTitle(title));
 					if(movie!=null) {
-						if(movie.getAttribute("Type").equals("series")) {
+						if(movie.getAttribute("Type").equals("series") && !movie.getAttribute("totalSeasons").equals("N/A")) {
 							int nbrSeason = Integer.parseInt(movie.getAttribute("totalSeasons"));
 							for(int s=1; s<=nbrSeason; s++) {
 								MovieModel season=parserFileJSON(SearchMovies.getSpecificSeriesBySeason(title, s));
