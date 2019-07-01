@@ -59,13 +59,15 @@ public class ParserMovie {
 							int nbrSeason = Integer.parseInt(movie.getAttribute("totalSeasons"));
 							for(int s=1; s<=nbrSeason; s++) {
 								MovieModel season=parserFileJSON(SearchMovies.getSpecificSeriesBySeason(title, s));
-								int nbrEpisode = Integer.parseInt(season.getAttribute("Episodes"));
-								for(int ep=1; ep<=nbrEpisode; ep++) {
-									MovieModel episode=parserFileJSON(SearchMovies.getSpecificSeriesByEpisode(title, s, ep));
-									if(episode!=null) {
-										episode.setType(TYPE.SERIE);
-										episode.setAttribute("SerieTitle", title);
-										elements.add(episode);
+								if(season.getAttribute("Episodes")!=null) {
+									int nbrEpisode = Integer.parseInt(season.getAttribute("Episodes"));
+									for(int ep=1; ep<=nbrEpisode; ep++) {
+										MovieModel episode=parserFileJSON(SearchMovies.getSpecificSeriesByEpisode(title, s, ep));
+										if(episode!=null) {
+											episode.setType(TYPE.SERIE);
+											episode.setAttribute("SerieTitle", title);
+											elements.add(episode);
+										}
 									}
 								}
 							}

@@ -185,7 +185,8 @@ public class SearchMoviePage extends JPanel {
 									s.append("</td>");
 									
 									s.append("<td>");
-										if (m.getAttribute("Type").equals("episode") ){
+									System.out.println("************"+m.getAttribute("Type"));
+										if (m.getAttribute("Type")!=null&&m.getAttribute("Type").equals("episode") ){
 											s.append("<p align=\"center\" style=\"font-size:40px; font-weight:bold;\">"+m.getAttribute("Title") + " - Serie: " + m.getAttribute("SerieTitle"));
 											s.append("<span style=\"font-size:13px;\"> - "+m.getAttribute("Runtime")+"</span>");
 											s.append("<br>");
