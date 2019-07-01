@@ -2,10 +2,11 @@ package fr.dauphine.sia;
 
 import java.util.List;
 
-import fr.dauphine.sia.parser.MovieModel;
-import fr.dauphine.sia.parser.ParserMovie;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+
+import fr.dauphine.sia.parser.MovieModel;
+import fr.dauphine.sia.parser.ParserMovie;
 
 public class MoviesTest {
 
