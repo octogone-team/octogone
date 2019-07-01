@@ -1,7 +1,5 @@
 package fr.dauphine.sia.search;
 
-import fr.dauphine.sia.properties.PropertiesLoader;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,6 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
+
+import fr.dauphine.sia.properties.PropertiesLoader;
 
 public class SearchMusics {
 	private static Properties API = PropertiesLoader.get("MusicAPIConfig.properties");

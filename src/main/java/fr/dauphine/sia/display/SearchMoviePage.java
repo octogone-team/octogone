@@ -1,13 +1,21 @@
 package fr.dauphine.sia.display;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -18,9 +26,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
-import fr.dauphine.sia.search.SearchMovies;
+
 import fr.dauphine.sia.parser.MovieModel;
 import fr.dauphine.sia.parser.ParserMovie;
+import fr.dauphine.sia.search.SearchMovies;
 
 public class SearchMoviePage extends JPanel {
 	private static final long serialVersionUID = 1L;

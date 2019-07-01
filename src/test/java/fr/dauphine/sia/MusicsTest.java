@@ -4,10 +4,10 @@ package fr.dauphine.sia;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import fr.dauphine.sia.parser.MusicModel;
 import fr.dauphine.sia.parser.ParserMusic;
-import org.junit.jupiter.api.Assertions;
 
 public class MusicsTest {
 

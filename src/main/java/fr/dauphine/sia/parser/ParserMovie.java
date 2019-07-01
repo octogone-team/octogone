@@ -2,12 +2,14 @@ package fr.dauphine.sia.parser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import fr.dauphine.sia.parser.MovieModel.TYPE;
-import fr.dauphine.sia.properties.PropertiesLoader;
+
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import fr.dauphine.sia.parser.MovieModel.TYPE;
+import fr.dauphine.sia.properties.PropertiesLoader;
 import fr.dauphine.sia.search.SearchMovies;
 
 public class ParserMovie {
