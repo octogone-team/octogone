@@ -27,7 +27,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
-
 import fr.dauphine.sia.parser.MusicModel;
 import fr.dauphine.sia.parser.ParserMusic;
 import fr.dauphine.sia.search.SearchMusics;
